@@ -78,13 +78,13 @@ export default function About() {
               variants={itemVariants}
               className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"
             >
-              I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>, a 19-year-old freelance web developer based on the Sunshine Coast.
+              Hey there! I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>, a 19-year-old web developer from the Sunshine Coast who&apos;s genuinely passionate about helping people get online.
             </motion.p>
             <motion.p
               variants={itemVariants}
               className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             >
-              I specialise in building affordable, professional websites for small businesses, tradies, local shops, startups, and personal brands. My goal is to help local businesses establish a strong online presence without breaking the bank.
+              Whether you&apos;re a small business, tradie, local shop, startup, or just need a personal website - I&apos;m here to help! I know how overwhelming it can be, so I keep things simple, affordable, and I&apos;ll walk you through everything. No tech jargon, just honest help.
             </motion.p>
 
             {/* Skills Grid */}

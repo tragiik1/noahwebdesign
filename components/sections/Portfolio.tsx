@@ -68,7 +68,7 @@ export default function Portfolio() {
             My Work
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Here are some of the projects I&apos;ve built for clients. Each website is custom-designed and optimized for performance.
+            Check out some of the websites I&apos;ve built! Each one is custom-made and built to actually work well. I&apos;m pretty proud of these.
           </p>
         </motion.div>
 

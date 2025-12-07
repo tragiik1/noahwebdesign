@@ -22,7 +22,7 @@ export default function Footer() {
               Nova Web
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Professional websites for businesses. Clean, fast, and affordable.
+              Friendly web developer helping businesses get online. Clean websites that work, without the crazy prices.
             </p>
           </div>
 

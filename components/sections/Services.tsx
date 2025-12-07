@@ -55,7 +55,7 @@ export default function Services() {
             Services
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            Comprehensive web solutions tailored to your business needs. Affordable, professional, and delivered on time.
+            Here&apos;s what I can help you with! I&apos;m flexible and happy to work with whatever you need. Let&apos;s chat about what would work best for you.
           </p>
           
           {/* Pricing */}
@@ -67,12 +67,12 @@ export default function Services() {
           >
             <div className="text-center sm:text-left">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Simple Websites</p>
-              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$800–$1,500</p>
+              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$500–$1,200</p>
             </div>
             <div className="hidden sm:block w-px h-12 bg-primary-200 dark:bg-primary-800"></div>
             <div className="text-center sm:text-left">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Polished Sites</p>
-              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$1,500–$3,000</p>
+              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$1,200–$2,500</p>
             </div>
           </motion.div>
         </motion.div>

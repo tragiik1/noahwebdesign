@@ -108,7 +108,7 @@ export default function Hero() {
           variants={itemVariants}
           className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto"
         >
-          Hi, I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>. I build clean, fast, affordable websites from scratch.
+          Hey! I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>. I love building clean, fast websites that actually work - and I keep it affordable because I know what it&apos;s like starting out.
         </motion.p>
 
         <motion.div

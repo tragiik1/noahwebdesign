@@ -22,7 +22,7 @@ export default function Contact() {
     setTimeout(() => {
       setIsSubmitting(false)
       setFormData({ name: '', email: '', message: '' })
-      alert('Thank you for your message! I\'ll get back to you soon.')
+      alert('Thanks so much for reaching out! I\'ll get back to you really soon - usually within a few hours!')
     }, 1000)
   }
 
@@ -46,7 +46,7 @@ export default function Contact() {
             Get In Touch
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Ready to start your project? Let&apos;s chat about how I can help bring your vision to life.
+            Got a project in mind? Let&apos;s have a chat! I&apos;m always happy to help, answer questions, or just talk through ideas. No pressure, just friendly conversation.
           </p>
         </motion.div>
 
@@ -128,7 +128,7 @@ export default function Contact() {
                 Contact Information
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Feel free to reach out through the form or contact me directly. I typically respond within 24 hours.
+                Drop me a message anytime! I&apos;m pretty quick to respond (usually within a few hours), and I&apos;m always happy to chat about your project or answer any questions you might have.
               </p>
             </div>
 

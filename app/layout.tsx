@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: 'Nova Web | Professional Websites for Your Business',
-  description: 'Hi, I\'m Noah. I build clean, fast, affordable websites from scratch for businesses, small companies, and personal brands.',
+  description: 'Hey! I\'m Noah, a friendly 19-year-old web developer who loves helping people get online. I build clean, fast, affordable websites - no tech jargon, just honest help.',
   keywords: 'web developer, website design, freelance developer, affordable websites, custom websites',
   authors: [{ name: 'Noah' }],
   openGraph: {

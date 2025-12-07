@@ -50,7 +50,7 @@ export default function Socials() {
             Let&apos;s Connect
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Follow my work, check out my code, or reach out directly. I&apos;d love to hear from you!
+            Come say hi! Follow along with what I&apos;m working on, check out my code, or just reach out if you want to chat. I&apos;m always up for connecting!
           </p>
         </motion.div>
 
