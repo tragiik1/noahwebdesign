@@ -9,12 +9,12 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Noah Web Design | Professional Websites for Your Business',
+  title: 'Nova Web | Professional Websites for Your Business',
   description: 'Hi, I\'m Noah. I build clean, fast, affordable websites from scratch for businesses, small companies, and personal brands.',
   keywords: 'web developer, website design, freelance developer, affordable websites, custom websites',
   authors: [{ name: 'Noah' }],
   openGraph: {
-    title: 'Noah Web Design | Professional Websites',
+    title: 'Nova Web | Professional Websites',
     description: 'Affordable, professional websites for businesses',
     type: 'website',
   },
