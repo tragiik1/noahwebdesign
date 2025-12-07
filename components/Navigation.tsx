@@ -9,7 +9,12 @@ import Link from 'next/link'
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +61,7 @@ export default function Navigation() {
               </Link>
             ))}
             <button
-              onClick={toggleTheme}
+              onClick={mounted ? toggleTheme : undefined}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle theme"
             >
@@ -77,7 +82,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
             <button
-              onClick={toggleTheme}
+              onClick={mounted ? toggleTheme : undefined}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
               aria-label="Toggle theme"
             >
