@@ -66,6 +66,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Optimize animations performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU acceleration for animated elements */
+[class*="motion-"],
+[data-framer-component] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -81,5 +94,24 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Hide scroll indicator - target parent container and all children */
+section#home div[class*="absolute"][class*="bottom-10"],
+section#home > div[class*="absolute"][class*="bottom-10"],
+div[class*="absolute"][class*="bottom-10"][class*="left-1"],
+div.w-6.h-10.border-2.rounded-full.flex.justify-center,
+div[class*="w-6"][class*="h-10"][class*="border-2"][class*="rounded-full"],
+section#home div[class*="w-6"][class*="h-10"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  transform: none !important;
 }
 

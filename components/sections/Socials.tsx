@@ -10,36 +10,26 @@ const socialLinks = [
     icon: Instagram,
     name: 'Instagram',
     href: '#',
-    color: 'from-pink-500 to-purple-500',
-    hoverColor: 'hover:from-pink-600 hover:to-purple-600',
   },
   {
     icon: MessageCircle,
     name: 'TikTok',
     href: '#',
-    color: 'from-gray-900 to-gray-700',
-    hoverColor: 'hover:from-gray-800 hover:to-gray-600',
   },
   {
     icon: Github,
     name: 'GitHub',
     href: '#',
-    color: 'from-gray-800 to-gray-600',
-    hoverColor: 'hover:from-gray-700 hover:to-gray-500',
   },
   {
     icon: Mail,
     name: 'Email',
     href: 'mailto:hello@noahwebdesign.com',
-    color: 'from-primary-500 to-blue-500',
-    hoverColor: 'hover:from-primary-600 hover:to-blue-600',
   },
   {
     icon: Linkedin,
     name: 'LinkedIn',
     href: '#',
-    color: 'from-blue-600 to-blue-800',
-    hoverColor: 'hover:from-blue-700 hover:to-blue-900',
   },
 ]
 
@@ -51,9 +41,9 @@ export default function Socials() {
     <section ref={ref} className="py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -64,7 +54,7 @@ export default function Socials() {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-4">
           {socialLinks.map((social, index) => {
             const Icon = social.icon
             return (
@@ -73,19 +63,14 @@ export default function Socials() {
                 href={social.href}
                 target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5, type: 'spring' }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative group px-8 py-6 bg-gradient-to-r ${social.color} ${social.hoverColor} rounded-xl text-white shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-3 min-w-[200px]`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                transition={{ delay: index * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -2 }}
+                className="group px-6 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-500 dark:hover:border-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
               >
-                <Icon className="w-6 h-6" />
-                <span className="font-semibold">{social.name}</span>
-                <motion.div
-                  className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
-                  initial={false}
-                />
+                <Icon className="w-5 h-5" />
+                <span className="font-medium text-sm">{social.name}</span>
               </motion.a>
             )
           })}

@@ -22,7 +22,7 @@ export default function Footer() {
               Noah Web Design
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Professional websites for Sunshine Coast businesses. Clean, fast, and affordable.
+              Professional websites for businesses. Clean, fast, and affordable.
             </p>
           </div>
 

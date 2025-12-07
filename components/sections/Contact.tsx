@@ -37,9 +37,9 @@ export default function Contact() {
     <section id="contact" ref={ref} className="py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -53,9 +53,9 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ delay: 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -106,9 +106,9 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                className="w-full px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 will-change-transform"
               >
                 <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 <Send className="w-5 h-5" />
@@ -118,9 +118,9 @@ export default function Contact() {
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ delay: 0.15, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-8"
           >
             <div>
@@ -134,8 +134,8 @@ export default function Contact() {
 
             <div className="space-y-6">
               <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
                   <Mail className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -152,8 +152,8 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
                   <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -169,8 +169,8 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
                   <MapPin className="w-6 h-6 text-primary-600 dark:text-primary-400" />

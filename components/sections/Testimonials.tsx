@@ -64,9 +64,9 @@ export default function Testimonials() {
     <section ref={ref} className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -81,10 +81,10 @@ export default function Testimonials() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-xl"
             >
               <Quote className="w-12 h-12 text-primary-600 dark:text-primary-400 mb-6" />
@@ -113,7 +113,7 @@ export default function Testimonials() {
           <div className="flex items-center justify-center mt-8 space-x-4">
             <button
               onClick={prevTestimonial}
-              className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-300"
+              className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-200"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -123,7 +123,7 @@ export default function Testimonials() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
                     index === currentIndex
                       ? 'bg-primary-600 w-8'
                       : 'bg-gray-300 dark:bg-gray-600'
@@ -134,7 +134,7 @@ export default function Testimonials() {
             </div>
             <button
               onClick={nextTestimonial}
-              className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-300"
+              className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 transition-all duration-200"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-6 h-6" />
