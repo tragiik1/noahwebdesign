@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent mb-4">
-              Nova Web
+              Noah
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Friendly web developer helping businesses get online. Clean websites that work, without the crazy prices.
@@ -75,7 +75,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>&copy; {currentYear} Nova Web. All rights reserved.</p>
+          <p>&copy; {currentYear} Noah. All rights reserved.</p>
           <p className="mt-2">Sunshine Coast, Australia</p>
         </div>
       </div>
