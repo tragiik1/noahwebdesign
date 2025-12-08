@@ -23,11 +23,40 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true)
+    
+    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme) {
       setTheme(savedTheme)
     } else {
-      setTheme('dark') // Default to dark
+      // Use system preference
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setTheme(systemPrefersDark ? 'dark' : 'light')
+    }
+    
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Only update if user hasn't manually set a preference
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light')
+      }
+    }
+    
+    // Modern browsers
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange)
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(handleChange)
+    }
+    
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleChange)
+      } else {
+        mediaQuery.removeListener(handleChange)
+      }
     }
   }, [])
 
@@ -38,12 +67,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       } else {
         document.documentElement.classList.remove('dark')
       }
-      localStorage.setItem('theme', theme)
+      // Only save to localStorage if user manually set it
+      // (system preference changes won't save)
+      if (localStorage.getItem('theme')) {
+        localStorage.setItem('theme', theme)
+      }
     }
   }, [theme, mounted])
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+    setTheme(prev => {
+      const newTheme = prev === 'dark' ? 'light' : 'dark'
+      // Save manual preference
+      localStorage.setItem('theme', newTheme)
+      return newTheme
+    })
   }
 
   return (

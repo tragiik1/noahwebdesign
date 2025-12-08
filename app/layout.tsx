@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <Script
           id="theme-init"
@@ -34,11 +34,21 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const theme = localStorage.getItem('theme') || 'dark';
-                if (theme === 'dark') {
-                  document.documentElement.classList.add('dark');
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                  if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 } else {
-                  document.documentElement.classList.remove('dark');
+                  // Use system preference
+                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (systemPrefersDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 }
               })();
             `,
