@@ -9,7 +9,7 @@ const faqs = [
   {
     id: 1,
     question: 'How long does it take to build a website?',
-    answer: 'It depends on the project! Simple websites usually take 1-2 weeks, while more polished sites with extra features can take 3-4 weeks. I\'ll give you a timeline when we chat about your project.',
+    answer: 'It depends on the project! Simple websites can take anywhere from 3-7 days, while more polished sites with extra features typically take 2-3 weeks. I\'ll give you a specific timeline when we chat about your project.',
   },
   {
     id: 2,
