@@ -57,9 +57,10 @@ export default function Portfolio() {
               <div className="relative h-64 overflow-hidden">
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} - ${project.description}`}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-300 ease-out will-change-transform"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </div>
@@ -80,9 +81,12 @@ export default function Portfolio() {
                     </span>
                   ))}
                 </div>
-                <button className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-200 group-hover:translate-x-1">
+                <button 
+                  className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-200 group-hover:translate-x-1"
+                  aria-label={`View ${project.title} project`}
+                >
                   <span>View Project</span>
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 </button>
               </div>
             </motion.div>

@@ -1,24 +1,15 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import { metadata } from './metadata'
+import { StructuredData } from './structured-data'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
-export const metadata: Metadata = {
-  title: 'Noah | Professional Websites for Your Business',
-  description: 'Hey! I\'m Noah, a friendly 19-year-old web developer who loves helping people get online. I build clean, fast, affordable websites - no tech jargon, just honest help.',
-  keywords: 'web developer, website design, freelance developer, affordable websites, custom websites',
-  authors: [{ name: 'Noah' }],
-  openGraph: {
-    title: 'Noah | Professional Websites',
-    description: 'Affordable, professional websites for businesses',
-    type: 'website',
-  },
-}
+export { metadata }
 
 export default function RootLayout({
   children,
@@ -26,8 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-AU" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <StructuredData />
         <Script
           id="theme-init"
           strategy="beforeInteractive"

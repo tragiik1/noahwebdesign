@@ -29,7 +29,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+    <section id="home" aria-label="Hero section" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -92,17 +92,14 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
-        >
-          <span className="block text-gray-900 dark:text-white">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          <motion.span variants={itemVariants} className="block text-gray-900 dark:text-white">
             Professional Websites
-          </span>
-          <span className="block bg-gradient-to-r from-primary-600 via-blue-600 to-primary-400 bg-clip-text text-transparent">
+          </motion.span>
+          <motion.span variants={itemVariants} className="block bg-gradient-to-r from-primary-600 via-blue-600 to-primary-400 bg-clip-text text-transparent">
             for Your Business
-          </span>
-        </motion.h1>
+          </motion.span>
+        </h1>
 
         <motion.p
           variants={itemVariants}

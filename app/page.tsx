@@ -8,15 +8,17 @@ import Contact from '@/components/sections/Contact'
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
-      <Hero />
-      <About />
-      <Portfolio />
-      <Services />
-      <Socials />
-      <Testimonials />
-      <Contact />
-    </main>
+    <>
+      <main className="overflow-hidden" role="main">
+        <Hero />
+        <About />
+        <Portfolio />
+        <Services />
+        <Socials />
+        <Testimonials />
+        <Contact />
+      </main>
+    </>
   )
 }
 
