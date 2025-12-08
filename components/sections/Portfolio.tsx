@@ -98,7 +98,7 @@ export default function Portfolio() {
         >
           <div className="inline-block px-8 py-6 bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 dark:border-primary-800 rounded-xl">
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-2">
-              Want to help me build my portfolio?
+              Want to help me build my portfolio? :)
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               I&apos;d love to work on your project and add it here! Let&apos;s chat about what you need.
