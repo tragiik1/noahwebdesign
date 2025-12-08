@@ -67,12 +67,12 @@ export default function Services() {
           >
             <div className="text-center sm:text-left">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Simple Websites</p>
-              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$499–$1,199</p>
+              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$499–$1199</p>
             </div>
             <div className="hidden sm:block w-px h-12 bg-primary-200 dark:bg-primary-800"></div>
             <div className="text-center sm:text-left">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Polished Sites</p>
-              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$1,199–$2,499</p>
+              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">$1199–$2499</p>
             </div>
           </motion.div>
         </motion.div>
