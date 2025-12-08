@@ -78,7 +78,7 @@ export default function About() {
               variants={itemVariants}
               className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"
             >
-              Hey there! I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>, a 19-year-old web developer from the Sunshine Coast who&apos;s genuinely passionate about helping people get online.
+              Hey there! I&apos;m <span className="font-semibold text-primary-600 dark:text-primary-400">Noah</span>, a 19-year-old web developer from Sunshine Coast, Australia who&apos;s genuinely passionate about helping people get online.
             </motion.p>
             <motion.p
               variants={itemVariants}
