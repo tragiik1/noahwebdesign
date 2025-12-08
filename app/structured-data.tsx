@@ -41,7 +41,7 @@ export function StructuredData() {
           name: 'Noah',
         },
       },
-      priceRange: '$500-$2,500',
+      priceRange: '$499-$2,499',
     },
   }
 
