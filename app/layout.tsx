@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import StickyCTA from '@/components/StickyCTA'
 import { metadata } from './metadata'
 import { StructuredData } from './structured-data'
 
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Footer />
+          <StickyCTA />
         </ThemeProvider>
       </body>
     </html>
