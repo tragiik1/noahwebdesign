@@ -85,13 +85,13 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-xl"
+              className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-xl min-h-[320px] md:min-h-[360px] flex flex-col"
             >
               <Quote className="w-12 h-12 text-primary-600 dark:text-primary-400 mb-6" />
-              <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed italic">
+              <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed italic flex-grow">
                 &quot;{testimonials[currentIndex].content}&quot;
               </p>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mt-auto">
                 <div>
                   <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     {testimonials[currentIndex].name}

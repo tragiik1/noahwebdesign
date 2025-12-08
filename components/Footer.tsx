@@ -81,6 +81,15 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
           <p>&copy; {currentYear} Noah. All rights reserved.</p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
+            <Link href="/privacy" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-gray-400">•</span>
+            <Link href="/terms" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
           <p className="mt-2">Sunshine Coast, Australia</p>
         </div>
       </div>
