@@ -21,34 +21,6 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop',
     tags: ['React', 'UI/UX', 'SEO'],
   },
-  {
-    id: 3,
-    title: 'Personal Brand Portfolio',
-    description: 'Clean portfolio website for a creative professional with project gallery.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop',
-    tags: ['Next.js', 'Framer Motion', 'Design'],
-  },
-  {
-    id: 4,
-    title: 'Startup Landing Page',
-    description: 'High-converting landing page for a tech startup with animated sections.',
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop',
-    tags: ['React', 'Animations', 'Marketing'],
-  },
-  {
-    id: 5,
-    title: 'E-commerce Store',
-    description: 'Full-featured online store with product catalog and checkout system.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-    tags: ['Next.js', 'E-commerce', 'Payment'],
-  },
-  {
-    id: 6,
-    title: 'Restaurant Website',
-    description: 'Beautiful restaurant website with menu, gallery, and reservation system.',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
-    tags: ['React', 'Design', 'Booking'],
-  },
 ]
 
 export default function Portfolio() {
@@ -67,12 +39,12 @@ export default function Portfolio() {
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
             My Work
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Check out some of the websites I&apos;ve built! Each one is custom-made and built to actually work well. I&apos;m pretty proud of these.
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
+            Here&apos;s what I&apos;ve built so far! I&apos;m just getting started and would love to add your project to this list. Let&apos;s work together and build something awesome!
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -116,6 +88,29 @@ export default function Portfolio() {
             </motion.div>
           ))}
         </div>
+        
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mt-12"
+        >
+          <div className="inline-block px-8 py-6 bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 dark:border-primary-800 rounded-xl">
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-2">
+              Want to help me build my portfolio?
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              I&apos;d love to work on your project and add it here! Let&apos;s chat about what you need.
+            </p>
+            <a
+              href="#contact"
+              className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
+            >
+              Let&apos;s Work Together
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
