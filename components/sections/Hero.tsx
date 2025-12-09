@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 export default function Hero() {
   const containerVariants = {
@@ -28,10 +29,23 @@ export default function Hero() {
     },
   }
 
+  // Generate random particles
+  const particles = useMemo(() => {
+    return Array.from({ length: 50 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 5,
+    }))
+  }, [])
+
   return (
     <section id="home" aria-label="Hero section" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Gradient Blobs */}
         <motion.div
           className="absolute top-20 left-10 w-72 h-72 bg-primary-300 dark:bg-primary-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20"
           animate={{
@@ -71,6 +85,32 @@ export default function Hero() {
             ease: 'easeInOut',
           }}
         />
+
+        {/* Particle Effects */}
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-primary-500/60 dark:bg-primary-500/30"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.5, 0.8, 0.5],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
       </div>
 
       {/* Content */}
