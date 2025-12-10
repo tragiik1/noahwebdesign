@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import Link from 'next/link'
@@ -12,6 +12,7 @@ export default function Navigation() {
   const [mounted, setMounted] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const { theme, toggleTheme } = useTheme()
+  const shouldReduceMotion = useReducedMotion()
   
   useEffect(() => {
     setMounted(true)
@@ -65,14 +66,15 @@ export default function Navigation() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: shouldReduceMotion ? 0 : -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
           ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -137,18 +139,18 @@ export default function Navigation() {
             })}
             <button
               onClick={mounted ? toggleTheme : undefined}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5" aria-hidden="true" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5" aria-hidden="true" />
               )}
             </button>
             <Link
               href="#contact"
-              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium"
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
             >
               Get Quote
             </Link>
@@ -158,24 +160,25 @@ export default function Navigation() {
           <div className="md:hidden flex items-center space-x-4">
             <button
               onClick={mounted ? toggleTheme : undefined}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5" aria-hidden="true" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5" aria-hidden="true" />
               )}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -189,6 +192,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.3 }}
             className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
           >
             <div className="px-4 py-4 space-y-4">
@@ -218,7 +222,7 @@ export default function Navigation() {
               <Link
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium"
+                className="block w-full text-center px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
                 Get Quote
               </Link>

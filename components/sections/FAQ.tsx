@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
@@ -42,6 +42,7 @@ export default function FAQ() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [openId, setOpenId] = useState<number | null>(null)
+  const shouldReduceMotion = useReducedMotion()
 
   const toggleFAQ = (id: number) => {
     setOpenId(openId === id ? null : id)
@@ -51,9 +52,9 @@ export default function FAQ() {
     <section id="faq" ref={ref} className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -68,14 +69,18 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <motion.div
               key={faq.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: index * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              transition={{
+                delay: shouldReduceMotion ? 0 : index * 0.05,
+                duration: shouldReduceMotion ? 0.01 : 0.4,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
             >
               <button
                 onClick={() => toggleFAQ(faq.id)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 focus:bg-gray-50 dark:focus:bg-gray-800 transition-colors duration-200 focus:outline-none"
                 aria-expanded={openId === faq.id}
                 aria-controls={`faq-answer-${faq.id}`}
               >
@@ -86,6 +91,7 @@ export default function FAQ() {
                   className={`w-5 h-5 text-gray-500 dark:text-gray-400 flex-shrink-0 transition-transform duration-200 ${
                     openId === faq.id ? 'transform rotate-180' : ''
                   }`}
+                  aria-hidden="true"
                 />
               </button>
               <AnimatePresence>
@@ -95,7 +101,7 @@ export default function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: shouldReduceMotion ? 0.01 : 0.2 }}
                     className="overflow-hidden"
                   >
                     <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">

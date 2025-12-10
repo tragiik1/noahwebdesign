@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Mail, Clock, MapPin, Send, CheckCircle, XCircle } from 'lucide-react'
@@ -8,6 +8,7 @@ import { Mail, Clock, MapPin, Send, CheckCircle, XCircle } from 'lucide-react'
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const shouldReduceMotion = useReducedMotion()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -71,9 +72,9 @@ export default function Contact() {
     <section id="contact" ref={ref} className="py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -87,9 +88,13 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ delay: 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: shouldReduceMotion ? 0 : -30 }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.1,
+              duration: shouldReduceMotion ? 0.01 : 0.4,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <AnimatePresence>
@@ -100,7 +105,7 @@ export default function Contact() {
                     exit={{ opacity: 0, y: -10 }}
                     className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center space-x-3"
                   >
-                    <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" aria-hidden="true" />
                     <p className="text-green-800 dark:text-green-200 text-sm">
                       Awesome! Your message is on its way. I&apos;ll get back to you super soon - usually within a few hours!
                     </p>
@@ -113,7 +118,7 @@ export default function Contact() {
                     exit={{ opacity: 0, y: -10 }}
                     className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center space-x-3"
                   >
-                    <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+                    <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" aria-hidden="true" />
                     <p className="text-red-800 dark:text-red-200 text-sm">
                       Oops! Something went wrong. Please try again or email me directly at hello@noahwebdesign.com
                     </p>
@@ -134,7 +139,7 @@ export default function Contact() {
                   required
                   aria-required="true"
                   autoComplete="name"
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                   placeholder="Your name"
                 />
               </div>
@@ -151,7 +156,7 @@ export default function Contact() {
                   required
                   aria-required="true"
                   autoComplete="email"
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -167,28 +172,32 @@ export default function Contact() {
                   required
                   aria-required="true"
                   rows={6}
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none resize-none text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none resize-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                   placeholder="Tell me about your project..."
                 />
               </div>
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 will-change-transform"
+                whileHover={shouldReduceMotion ? {} : { scale: 1.02, transition: { duration: 0.2 } }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                className="w-full px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 will-change-transform focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
                 <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                <Send className="w-5 h-5" />
+                <Send className="w-5 h-5" aria-hidden="true" />
               </motion.button>
             </form>
           </motion.div>
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ delay: 0.15, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: shouldReduceMotion ? 0 : 30 }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.15,
+              duration: shouldReduceMotion ? 0.01 : 0.4,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="space-y-8"
           >
             <div>
@@ -202,17 +211,17 @@ export default function Contact() {
 
             <div className="space-y-6">
               <motion.div
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
+                whileHover={shouldReduceMotion ? {} : { x: 4, transition: { duration: 0.2 } }}
+                className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg focus-within:shadow-lg transition-shadow duration-200 will-change-transform focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <Mail className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <Mail className="w-6 h-6 text-primary-600 dark:text-primary-400" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Email</h4>
                   <a
                     href="mailto:hello@noahwebdesign.com"
-                    className="text-primary-600 dark:text-primary-400 hover:underline"
+                    className="text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-1"
                   >
                     hello@noahwebdesign.com
                   </a>
@@ -220,11 +229,11 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                whileHover={shouldReduceMotion ? {} : { x: 4, transition: { duration: 0.2 } }}
                 className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Business Hours</h4>
@@ -237,11 +246,11 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                whileHover={shouldReduceMotion ? {} : { x: 4, transition: { duration: 0.2 } }}
                 className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 will-change-transform"
               >
                 <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                  <MapPin className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <MapPin className="w-6 h-6 text-primary-600 dark:text-primary-400" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Location</h4>

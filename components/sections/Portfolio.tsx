@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { ExternalLink } from 'lucide-react'
@@ -26,14 +26,15 @@ const projects = [
 export default function Portfolio() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <section id="portfolio" ref={ref} className="py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -48,17 +49,22 @@ export default function Portfolio() {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ delay: index * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="group bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-200 will-change-transform"
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+              transition={{
+                delay: shouldReduceMotion ? 0 : index * 0.05,
+                duration: shouldReduceMotion ? 0.01 : 0.4,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              whileHover={shouldReduceMotion ? {} : { y: -8, transition: { duration: 0.2 } }}
+              className="group bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl focus-within:shadow-2xl transition-shadow duration-200 will-change-transform"
             >
               <div className="relative h-64 overflow-hidden">
                 <Image
                   src={project.image}
                   alt={`${project.title} - ${project.description}`}
                   fill
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-300 ease-out will-change-transform"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
@@ -81,8 +87,8 @@ export default function Portfolio() {
                     </span>
                   ))}
                 </div>
-                <button 
-                  className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-200 group-hover:translate-x-1"
+                <button
+                  className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 focus:text-primary-700 dark:focus:text-primary-300 transition-all duration-200 group-hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-2 py-1 -ml-2"
                   aria-label={`View ${project.title} project`}
                 >
                   <span>View Project</span>
@@ -95,9 +101,13 @@ export default function Portfolio() {
         
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{
+            delay: shouldReduceMotion ? 0 : 0.3,
+            duration: shouldReduceMotion ? 0.01 : 0.5,
+            ease: [0.16, 1, 0.3, 1],
+          }}
           className="text-center mt-12"
         >
           <div className="inline-block px-8 py-6 bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 dark:border-primary-800 rounded-xl">
@@ -109,7 +119,7 @@ export default function Portfolio() {
             </p>
             <a
               href="#contact"
-              className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
+              className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 focus:bg-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
             >
               Let&apos;s Work Together
             </a>

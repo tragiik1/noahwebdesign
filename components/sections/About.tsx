@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Code, Palette, Zap, Search } from 'lucide-react'
@@ -8,6 +8,7 @@ import { Code, Palette, Zap, Search } from 'lucide-react'
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const shouldReduceMotion = useReducedMotion()
 
   const skills = [
     { icon: Code, name: 'HTML, CSS, JavaScript' },
@@ -27,12 +28,12 @@ export default function About() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: shouldReduceMotion ? 0.01 : 0.5,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -52,8 +53,12 @@ export default function About() {
             <div className="relative">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-primary-400 to-blue-500 rounded-2xl transform rotate-6 will-change-transform"
-                animate={{ rotate: [6, 8, 6] }}
-                transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+                animate={shouldReduceMotion ? {} : { rotate: [6, 8, 6] }}
+                transition={
+                  shouldReduceMotion
+                    ? {}
+                    : { duration: 6, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }
+                }
               />
               <div className="relative bg-gray-200 dark:bg-gray-800 rounded-2xl p-8 aspect-square flex items-center justify-center">
                 <div className="text-center">
@@ -97,12 +102,16 @@ export default function About() {
                 return (
                   <motion.div
                     key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                    transition={{ delay: 0.2 + index * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+                    initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+                    transition={{
+                      delay: shouldReduceMotion ? 0 : 0.2 + index * 0.05,
+                      duration: shouldReduceMotion ? 0.01 : 0.4,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus-within:bg-gray-100 dark:focus-within:bg-gray-700 transition-colors group focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
                   >
-                    <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-2 group-hover:scale-110 transition-transform" />
+                    <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-2 group-hover:scale-110 transition-transform" aria-hidden="true" />
                     <p className="text-sm font-medium text-gray-900 dark:text-white">{skill.name}</p>
                   </motion.div>
                 )

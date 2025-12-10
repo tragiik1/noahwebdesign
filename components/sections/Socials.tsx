@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Instagram, Github, Mail, Linkedin, MessageCircle } from 'lucide-react'
@@ -36,14 +36,15 @@ const socialLinks = [
 export default function Socials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <section ref={ref} className="py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -63,13 +64,17 @@ export default function Socials() {
                 href={social.href}
                 target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ delay: index * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -2 }}
-                className="group px-6 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-500 dark:hover:border-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+                transition={{
+                  delay: shouldReduceMotion ? 0 : index * 0.05,
+                  duration: shouldReduceMotion ? 0.01 : 0.3,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                className="group px-6 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-500 dark:hover:border-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 focus:border-primary-500 dark:focus:border-primary-400 focus:bg-gray-50 dark:focus:bg-gray-700 transition-all duration-200 flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus:text-primary-600 dark:focus:text-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5" aria-hidden="true" />
                 <span className="font-medium text-sm">{social.name}</span>
               </motion.a>
             )

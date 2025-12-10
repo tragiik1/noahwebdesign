@@ -72,6 +72,64 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Enhanced focus styles for better accessibility */
+*:focus-visible {
+  outline: 2px solid theme('colors.primary.600');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Better focus styles for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid theme('colors.primary.600');
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* GPU acceleration for animated elements */
 [class*="motion-"],
 [data-framer-component] {
@@ -94,6 +152,26 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Improved text selection */
+::selection {
+  @apply bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100;
+}
+
+::-moz-selection {
+  @apply bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100;
+}
+
+/* Better link styles */
+a:not([class]) {
+  @apply text-primary-600 dark:text-primary-400 underline decoration-2 underline-offset-2 hover:text-primary-700 dark:hover:text-primary-300 transition-colors;
+}
+
+/* Improved button focus states */
+button:not([class]),
+input[type="submit"]:not([class]) {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2;
 }
 
 /* Hide scroll indicator - target parent container and all children */

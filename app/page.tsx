@@ -10,7 +10,7 @@ import Contact from '@/components/sections/Contact'
 export default function Home() {
   return (
     <>
-      <main className="overflow-hidden" role="main">
+      <main id="main-content" className="overflow-hidden" role="main" tabIndex={-1}>
         <Hero />
         <About />
         <Portfolio />

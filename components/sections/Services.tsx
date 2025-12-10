@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Globe, Layout, RefreshCw, ShoppingCart, Server, Wrench } from 'lucide-react'
@@ -41,14 +41,15 @@ const services = [
 export default function Services() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <section id="services" ref={ref} className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -60,9 +61,13 @@ export default function Services() {
           
           {/* Pricing */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ delay: 0.2, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.2,
+              duration: shouldReduceMotion ? 0.01 : 0.4,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-6 py-4 bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 dark:border-primary-800 rounded-xl"
           >
             <div className="text-center sm:text-left">
@@ -83,14 +88,18 @@ export default function Services() {
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ delay: index * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
-                className="group p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:bg-white dark:hover:bg-gray-700 transition-colors duration-200 shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 will-change-transform"
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+                transition={{
+                  delay: shouldReduceMotion ? 0 : index * 0.05,
+                  duration: shouldReduceMotion ? 0.01 : 0.4,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.02, transition: { duration: 0.2 } }}
+                className="group p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:bg-white dark:hover:bg-gray-700 focus-within:bg-white dark:focus-within:bg-gray-700 transition-colors duration-200 shadow-lg hover:shadow-2xl focus-within:shadow-2xl border border-gray-200 dark:border-gray-700 will-change-transform focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
               >
-                <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-600 group-hover:scale-110 transition-all duration-200 will-change-transform">
-                  <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" />
+                <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-600 group-focus-within:bg-primary-600 transition-all duration-200 will-change-transform">
+                  <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400 group-hover:text-white group-focus-within:text-white transition-colors" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                   {service.title}

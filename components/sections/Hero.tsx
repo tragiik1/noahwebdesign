@@ -1,29 +1,31 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion()
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
+        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        delayChildren: shouldReduceMotion ? 0 : 0.1,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: shouldReduceMotion ? 0.01 : 0.5,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -48,69 +50,82 @@ export default function Hero() {
         {/* Gradient Blobs */}
         <motion.div
           className="absolute top-20 left-10 w-72 h-72 bg-primary-300 dark:bg-primary-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
-          }}
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  x: [0, 100, 0],
+                  y: [0, 50, 0],
+                  scale: [1, 1.2, 1],
+                }
+          }
           transition={{
-            duration: 20,
-            repeat: Infinity,
+            duration: shouldReduceMotion ? 0 : 20,
+            repeat: shouldReduceMotion ? 0 : Infinity,
             ease: 'easeInOut',
           }}
         />
         <motion.div
           className="absolute top-40 right-10 w-96 h-96 bg-blue-300 dark:bg-blue-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20"
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 80, 0],
-            scale: [1, 1.3, 1],
-          }}
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  x: [0, -80, 0],
+                  y: [0, 80, 0],
+                  scale: [1, 1.3, 1],
+                }
+          }
           transition={{
-            duration: 25,
-            repeat: Infinity,
+            duration: shouldReduceMotion ? 0 : 25,
+            repeat: shouldReduceMotion ? 0 : Infinity,
             ease: 'easeInOut',
           }}
         />
         <motion.div
           className="absolute bottom-20 left-1/2 w-80 h-80 bg-purple-300 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20"
-          animate={{
-            x: [0, 60, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.1, 1],
-          }}
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  x: [0, 60, 0],
+                  y: [0, -60, 0],
+                  scale: [1, 1.1, 1],
+                }
+          }
           transition={{
-            duration: 30,
-            repeat: Infinity,
+            duration: shouldReduceMotion ? 0 : 30,
+            repeat: shouldReduceMotion ? 0 : Infinity,
             ease: 'easeInOut',
           }}
         />
 
         {/* Particle Effects */}
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-primary-500/60 dark:bg-primary-500/30"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.5, 0.8, 0.5],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
+        {!shouldReduceMotion &&
+          particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute rounded-full bg-primary-500/60 dark:bg-primary-500/30"
+              style={{
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+                opacity: [0.5, 0.8, 0.5],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                delay: particle.delay,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
       </div>
 
       {/* Content */}
@@ -152,24 +167,36 @@ export default function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-4"
         >
-          <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="will-change-transform">
+          <motion.div
+            whileHover={shouldReduceMotion ? {} : { y: -2, scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="will-change-transform"
+          >
             <Link
               href="#portfolio"
-              className="group px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center space-x-2"
+              className="group px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors duration-200 shadow-lg hover:shadow-xl focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 flex items-center space-x-2"
             >
               <span>View My Work</span>
               <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                animate={shouldReduceMotion ? {} : { x: [0, 4, 0] }}
+                transition={
+                  shouldReduceMotion
+                    ? {}
+                    : { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+                }
               >
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </motion.div>
             </Link>
           </motion.div>
-          <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="will-change-transform">
+          <motion.div
+            whileHover={shouldReduceMotion ? {} : { y: -2, scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="will-change-transform"
+          >
             <Link
               href="#contact"
-              className="px-8 py-4 bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border-2 border-primary-600 dark:border-primary-400 rounded-lg font-semibold text-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              className="px-8 py-4 bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border-2 border-primary-600 dark:border-primary-400 rounded-lg font-semibold text-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20 transition-colors duration-200 shadow-lg hover:shadow-xl focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
             >
               Get a Free Quote
             </Link>
