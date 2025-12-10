@@ -3,7 +3,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Code, Palette, Zap, Search } from 'lucide-react'
+import { Code, Palette, Zap, Search, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function About() {
   const ref = useRef(null)
@@ -95,7 +96,7 @@ export default function About() {
             {/* Skills Grid */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-2 gap-4 mb-8"
             >
               {skills.map((skill, index) => {
                 const Icon = skill.icon
@@ -116,6 +117,17 @@ export default function About() {
                   </motion.div>
                 )
               })}
+            </motion.div>
+
+            {/* How I Work Link */}
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/how-i-work"
+                className="group inline-flex items-center space-x-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 focus:bg-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+              >
+                <span>How I Work</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+              </Link>
             </motion.div>
           </motion.div>
         </motion.div>

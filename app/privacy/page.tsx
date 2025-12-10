@@ -103,12 +103,16 @@ export default function PrivacyPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Cookies</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Browser Storage</h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                This website may use cookies to enhance your browsing experience. Cookies are small text files stored on your device that help me remember your preferences and improve site functionality.
+                This website uses browser storage (localStorage and sessionStorage) to enhance your experience:
               </p>
+              <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-700 dark:text-gray-300">
+                <li><strong>Theme Preference:</strong> Your dark/light mode preference is saved in localStorage so it persists across visits</li>
+                <li><strong>UI Preferences:</strong> Some interface preferences (like dismissing notifications) are stored in sessionStorage for your current session</li>
+              </ul>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                You can control cookies through your browser settings. However, disabling cookies may affect some functionality of this website.
+                This data is stored locally on your device and is not sent to any servers. You can clear this data at any time through your browser settings. Note: This website does not use cookies.
               </p>
             </section>
 

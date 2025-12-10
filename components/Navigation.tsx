@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -13,56 +14,158 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home')
   const { theme, toggleTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHomePage = pathname === '/'
   
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  // Handle hash navigation when arriving from other pages
+  useEffect(() => {
+    if (isHomePage && window.location.hash) {
+      const hash = window.location.hash.substring(1)
+      const element = document.getElementById(hash)
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          setActiveSection(hash)
+        }, 300)
+      }
+    }
+  }, [isHomePage])
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Active section detection using Intersection Observer
+  // Improved active section detection using Intersection Observer with fallback
   useEffect(() => {
+    if (!isHomePage) {
+      setActiveSection('')
+      return
+    }
+
     const sections = ['home', 'about', 'portfolio', 'services', 'faq', 'contact']
     const observers: IntersectionObserver[] = []
+    let timeoutId: NodeJS.Timeout
 
-    sections.forEach((sectionId) => {
-      const section = document.getElementById(sectionId)
-      if (section) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setActiveSection(sectionId)
+    const updateActiveSection = (sectionId: string) => {
+      setActiveSection((prev) => {
+        if (prev !== sectionId) {
+          return sectionId
+        }
+        return prev
+      })
+    }
+
+    const initObservers = () => {
+      // Clean up existing observers
+      observers.forEach((observer) => observer.disconnect())
+      observers.length = 0
+
+      sections.forEach((sectionId) => {
+        const section = document.getElementById(sectionId)
+        if (section) {
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                clearTimeout(timeoutId)
+                updateActiveSection(sectionId)
+              }
+            },
+            {
+              rootMargin: '-10% 0px -60% 0px',
+              threshold: [0, 0.1, 0.5],
             }
-          },
-          {
-            rootMargin: '-20% 0px -70% 0px',
-            threshold: 0,
+          )
+          observer.observe(section)
+          observers.push(observer)
+        }
+      })
+    }
+
+    // Initial setup with delay to ensure DOM is ready
+    timeoutId = setTimeout(() => {
+      initObservers()
+    }, 100)
+
+    // Fallback: scroll-based detection with throttling
+    let ticking = false
+    const handleScrollFallback = () => {
+      if (!isHomePage || ticking) return
+      
+      ticking = true
+      requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 200
+        let currentSection = 'home'
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = document.getElementById(sections[i])
+          if (section) {
+            const sectionTop = section.offsetTop
+            if (scrollPosition >= sectionTop) {
+              currentSection = sections[i]
+              break
+            }
           }
-        )
-        observer.observe(section)
-        observers.push(observer)
-      }
-    })
+        }
+        
+        updateActiveSection(currentSection)
+        ticking = false
+      })
+    }
+
+    window.addEventListener('scroll', handleScrollFallback, { passive: true })
 
     return () => {
+      clearTimeout(timeoutId)
       observers.forEach((observer) => observer.disconnect())
+      window.removeEventListener('scroll', handleScrollFallback)
     }
-  }, [])
+  }, [isHomePage])
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Portfolio', href: '#portfolio', id: 'portfolio' },
-    { name: 'Services', href: '#services', id: 'services' },
-    { name: 'FAQ', href: '#faq', id: 'faq' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Home', href: '/#home', id: 'home' },
+    { name: 'About', href: '/#about', id: 'about' },
+    { name: 'Portfolio', href: '/#portfolio', id: 'portfolio' },
+    { name: 'Services', href: '/#services', id: 'services' },
+    { name: 'FAQ', href: '/#faq', id: 'faq' },
+    { name: 'Contact', href: '/#contact', id: 'contact' },
   ]
+
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const hash = href.split('#')[1]
+    
+    if (isHomePage && hash) {
+      // On home page, just scroll to section
+      e.preventDefault()
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        // Update active section immediately
+        setActiveSection(hash)
+      }
+    } else if (!isHomePage && hash) {
+      // On other pages, navigate to home then scroll
+      e.preventDefault()
+      router.push('/')
+      // Wait for navigation, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          setActiveSection(hash)
+        }
+      }, 100)
+    }
+    // If no hash, let default Link behavior handle it
+  }, [isHomePage, router])
 
   return (
     <motion.nav
@@ -83,7 +186,7 @@ export default function Navigation() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="#home" className="text-2xl font-bold relative group" aria-label="Noah - Home">
+            <Link href="/#home" onClick={(e) => handleNavClick(e, '/#home')} className="text-2xl font-bold relative group" aria-label="Noah - Home">
               <motion.span
                 className="inline-block bg-gradient-to-r from-primary-600 via-blue-600 to-primary-400 bg-clip-text text-transparent"
                 animate={{
@@ -110,11 +213,12 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id
+              const isActive = isHomePage && activeSection === link.id
               return (
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="relative text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium py-2"
                 >
                   <span className="relative z-10">{link.name}</span>
@@ -149,7 +253,8 @@ export default function Navigation() {
               )}
             </button>
             <Link
-              href="#contact"
+              href="/#contact"
+              onClick={(e) => handleNavClick(e, '/#contact')}
               className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
             >
               Get Quote
@@ -197,12 +302,15 @@ export default function Navigation() {
           >
             <div className="px-4 py-4 space-y-4">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.id
+                const isActive = isHomePage && activeSection === link.id
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      setIsMobileMenuOpen(false)
+                      handleNavClick(e, link.href)
+                    }}
                     className={`block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium py-2 relative ${
                       isActive ? 'text-primary-600 dark:text-primary-400' : ''
                     }`}
@@ -220,8 +328,11 @@ export default function Navigation() {
                 )
               })}
               <Link
-                href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="/#contact"
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false)
+                  handleNavClick(e, '/#contact')
+                }}
                 className="block w-full text-center px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:bg-primary-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
                 Get Quote

@@ -80,20 +80,59 @@ export function StructuredData() {
       {
         '@type': 'ListItem',
         position: 3,
-        name: 'Portfolio',
-        item: 'https://noahwebdesign.com#portfolio',
+        name: 'Contact',
+        item: 'https://noahwebdesign.com#contact',
       },
       {
         '@type': 'ListItem',
         position: 4,
-        name: 'Services',
-        item: 'https://noahwebdesign.com#services',
+        name: 'Privacy Policy',
+        item: 'https://noahwebdesign.com/privacy',
       },
       {
         '@type': 'ListItem',
         position: 5,
+        name: 'Terms of Service',
+        item: 'https://noahwebdesign.com/terms',
+      },
+    ],
+  }
+
+  // ItemList schema to help Google understand important pages for sitelinks
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Main Site Pages',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        url: 'https://noahwebdesign.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        url: 'https://noahwebdesign.com#about',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
         name: 'Contact',
-        item: 'https://noahwebdesign.com#contact',
+        url: 'https://noahwebdesign.com#contact',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Privacy Policy',
+        url: 'https://noahwebdesign.com/privacy',
+      },
+      {
+        '@type': 'ListItem',
+        position: 5,
+        name: 'Terms of Service',
+        url: 'https://noahwebdesign.com/terms',
       },
     ],
   }
@@ -111,6 +150,10 @@ export function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
     </>
   )

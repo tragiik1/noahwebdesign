@@ -24,7 +24,7 @@ const services = [
   {
     icon: ShoppingCart,
     title: 'E-commerce Setup',
-    description: 'Online stores with product catalogs, shopping carts, and secure payment integration.',
+    description: 'Online stores with product catalogues, shopping carts, and secure payment integration.',
   },
   {
     icon: Server,
