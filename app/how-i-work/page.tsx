@@ -64,7 +64,7 @@ const processSteps = [
 export default function HowIWorkPage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
