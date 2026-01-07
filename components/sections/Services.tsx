@@ -50,7 +50,7 @@ export default function Services() {
           {services.map((service) => (
             <div 
               key={service.title} 
-              className="p-6 bg-cream-50 dark:bg-coffee-950 hover:bg-cream-100 dark:hover:bg-coffee-900 transition-colors"
+              className="p-6 bg-cream-50 dark:bg-coffee-975 hover:bg-cream-100 dark:hover:bg-coffee-900 transition-colors"
             >
               <h3 className="text-lg font-display font-medium text-coffee-900 dark:text-cream-100 mb-2">
                 {service.title}

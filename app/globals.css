@@ -19,17 +19,17 @@
   }
 
   .dark {
-    --background: 20 25% 8%;
+    --background: 15 35% 3%;
     --foreground: 30 20% 92%;
-    --card: 20 25% 10%;
+    --card: 15 30% 5%;
     --card-foreground: 30 20% 92%;
     --primary: 28 45% 60%;
-    --primary-foreground: 20 25% 8%;
-    --secondary: 20 20% 14%;
+    --primary-foreground: 15 35% 3%;
+    --secondary: 15 25% 8%;
     --secondary-foreground: 30 20% 92%;
-    --muted: 20 20% 14%;
+    --muted: 15 25% 8%;
     --muted-foreground: 30 15% 55%;
-    --border: 20 20% 18%;
+    --border: 15 25% 12%;
     --ring: 28 45% 60%;
   }
 }
@@ -40,7 +40,7 @@
   }
 
   body {
-    @apply bg-cream-50 dark:bg-coffee-950 text-coffee-900 dark:text-cream-100;
+    @apply bg-cream-50 dark:bg-coffee-975 text-coffee-900 dark:text-cream-100;
   }
 
   h1, h2, h3, h4, h5, h6 {
