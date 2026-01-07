@@ -67,85 +67,82 @@ export default function HowIWorkPage() {
   const shouldReduceMotion = useReducedMotion() ?? false
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
+    <main className="min-h-screen bg-white dark:bg-[#070b14]">
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-primary-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-surface-50 via-white to-white dark:from-[#0a1020] dark:via-[#070b14] dark:to-[#070b14]" />
+        
+        {/* Decorative gradient */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-primary-500/10 to-transparent rounded-full blur-3xl" />
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="text-center"
           >
             <Link
               href="/#about"
-              className="inline-flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-2"
+              className="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 mb-8 text-sm font-medium transition-colors"
             >
               <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               <span>Back to About</span>
             </Link>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 text-gray-900 dark:text-white">
               How I Work
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              A simple, transparent process that gets you from idea to launch. No surprises, just clear steps and honest communication.
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              A simple, transparent process that gets you from idea to launch. No surprises, just clear steps.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Process Timeline */}
-      <section ref={ref} className="py-24 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-200 via-primary-400 to-primary-600 dark:from-primary-900 dark:via-primary-700 dark:to-primary-500 transform -translate-x-1/2" />
-
-            {/* Process Steps */}
-            <div className="space-y-24 lg:space-y-32">
-              {processSteps.map((step, index) => {
-                const Icon = step.icon
-                const isEven = index % 2 === 0
-
-                return (
-                  <ProcessStep
-                    key={step.id}
-                    step={step}
-                    index={index}
-                    isEven={isEven}
-                    shouldReduceMotion={shouldReduceMotion}
-                  />
-                )
-              })}
-            </div>
+      <section ref={ref} className="py-16 lg:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-16 lg:space-y-24">
+            {processSteps.map((step, index) => (
+              <ProcessStep
+                key={step.id}
+                step={step}
+                index={index}
+                isInView={isInView}
+                shouldReduceMotion={shouldReduceMotion}
+              />
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-surface-50 to-white dark:from-[#070b14] dark:via-[#0a1020] dark:to-[#070b14]" />
+        
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="bg-white dark:bg-gray-800/30 rounded-2xl p-8 lg:p-12 border border-gray-200/50 dark:border-gray-700/50 shadow-elevated"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold mb-4 text-gray-900 dark:text-white">
               Ready to Get Started?
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let&apos;s chat about your project! I&apos;m here to answer any questions and help you figure out what you need.
+            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto">
+              Let&apos;s chat about your project! I&apos;m here to answer any questions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/#contact"
-                className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 focus:bg-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 Get a Free Quote
               </Link>
               <Link
                 href="/#portfolio"
-                className="px-8 py-4 bg-white dark:bg-gray-900 text-primary-600 dark:text-primary-400 border-2 border-primary-600 dark:border-primary-400 rounded-lg font-semibold hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 rounded-xl font-semibold transition-all duration-200"
               >
                 View My Work
               </Link>
@@ -160,71 +157,71 @@ export default function HowIWorkPage() {
 function ProcessStep({
   step,
   index,
-  isEven,
+  isInView,
   shouldReduceMotion,
 }: {
   step: typeof processSteps[0]
   index: number
-  isEven: boolean
+  isInView: boolean
   shouldReduceMotion: boolean
 }) {
   const stepRef = useRef(null)
-  const stepInView = useInView(stepRef, { once: true, margin: '-20px' })
+  const stepInView = useInView(stepRef, { once: true, margin: '-50px' })
   const Icon = step.icon
 
   return (
     <motion.div
       ref={stepRef}
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-      animate={stepInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+      animate={stepInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
       transition={{
-        delay: shouldReduceMotion ? 0 : index * 0.2,
-        duration: shouldReduceMotion ? 0.01 : 0.6,
-        ease: [0.16, 1, 0.3, 1],
+        delay: shouldReduceMotion ? 0 : index * 0.05,
+        duration: shouldReduceMotion ? 0.01 : 0.3,
+        ease: [0.25, 0.1, 0.25, 1],
       }}
-      className={`relative flex flex-col lg:flex-row items-center gap-8 ${
-        isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-      }`}
+      className="relative"
     >
-      {/* Step Number Circle */}
-      <div className="relative z-10 flex-shrink-0">
-        <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl`}>
-          <Icon className="w-12 h-12 text-white" aria-hidden="true" />
+      <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-10">
+        {/* Step number and icon */}
+        <div className="flex-shrink-0">
+          <div className="relative">
+            <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
+              <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-white" aria-hidden="true" />
+            </div>
+            <div className="absolute -top-2 -right-2 w-7 h-7 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center text-sm font-bold text-gray-900 dark:text-white border-2 border-gray-100 dark:border-gray-800 shadow-sm">
+              {step.id}
+            </div>
+          </div>
         </div>
-        <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-600 dark:bg-primary-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-          {step.id}
-        </div>
-      </div>
 
-      {/* Content Card */}
-      <div className={`flex-1 ${isEven ? 'lg:text-right lg:pr-12' : 'lg:text-left lg:pl-12'}`}>
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-200">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+        {/* Content */}
+        <div className="flex-1">
+          <h2 className="text-2xl lg:text-3xl font-display font-bold mb-3 text-gray-900 dark:text-white">
             {step.title}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             {step.description}
           </p>
-          <ul className={`space-y-3 ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {step.details.map((detail, detailIndex) => (
-              <motion.li
+              <motion.div
                 key={detailIndex}
-                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : (isEven ? 20 : -20) }}
-                animate={stepInView ? { opacity: 1, x: 0 } : { opacity: 0, x: shouldReduceMotion ? 0 : (isEven ? 20 : -20) }}
+                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -5 }}
+                animate={stepInView ? { opacity: 1, x: 0 } : { opacity: 0, x: shouldReduceMotion ? 0 : -5 }}
                 transition={{
-                  delay: shouldReduceMotion ? 0 : index * 0.2 + detailIndex * 0.1,
-                  duration: shouldReduceMotion ? 0.01 : 0.4,
+                  delay: shouldReduceMotion ? 0 : 0.1 + detailIndex * 0.03,
+                  duration: shouldReduceMotion ? 0.01 : 0.2,
                 }}
-                className="flex items-start space-x-3"
+                className="flex items-center gap-2"
               >
-                <CheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                <span className="text-gray-700 dark:text-gray-300">{detail}</span>
-              </motion.li>
+                <CheckCircle className="w-4 h-4 text-primary-500 flex-shrink-0" aria-hidden="true" />
+                <span className="text-sm text-gray-600 dark:text-gray-400">{detail}</span>
+              </motion.div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </motion.div>
   )
 }
-

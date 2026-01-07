@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { Plus, Minus } from 'lucide-react'
 
 const faqs = [
   {
@@ -49,69 +49,86 @@ export default function FAQ() {
   }
 
   return (
-    <section id="faq" ref={ref} className="py-24 bg-white dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-surface-50/30 to-white dark:from-[#070b14] dark:via-[#0a1020] dark:to-[#070b14]" />
+      
+      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-            Frequently Asked Questions
+          <span className="inline-block text-primary-600 dark:text-primary-400 font-medium text-sm tracking-wide uppercase mb-4">
+            FAQ
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+            Got Questions?
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Got questions? I&apos;ve got answers! Here are some common things people ask me.
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Here are some common things people ask me.
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => (
             <motion.div
               key={faq.id}
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
               transition={{
-                delay: shouldReduceMotion ? 0 : index * 0.05,
-                duration: shouldReduceMotion ? 0.01 : 0.4,
-                ease: [0.16, 1, 0.3, 1],
+                delay: shouldReduceMotion ? 0 : index * 0.03,
+                duration: shouldReduceMotion ? 0.01 : 0.25,
+                ease: [0.25, 0.1, 0.25, 1],
               }}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
+              className="group"
             >
-              <button
-                onClick={() => toggleFAQ(faq.id)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 focus:bg-gray-50 dark:focus:bg-gray-800 transition-colors duration-200 focus:outline-none"
-                aria-expanded={openId === faq.id}
-                aria-controls={`faq-answer-${faq.id}`}
-              >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-                  {faq.question}
-                </h3>
-                <ChevronDown
-                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 flex-shrink-0 transition-transform duration-200 ${
-                    openId === faq.id ? 'transform rotate-180' : ''
-                  }`}
-                  aria-hidden="true"
-                />
-              </button>
-              <AnimatePresence>
-                {openId === faq.id && (
-                  <motion.div
-                    id={`faq-answer-${faq.id}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.01 : 0.2 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className={`bg-white dark:bg-gray-800/30 rounded-xl border transition-all duration-300 ${
+                openId === faq.id 
+                  ? 'border-primary-200 dark:border-primary-800/50 shadow-elevated' 
+                  : 'border-gray-200/50 dark:border-gray-700/50 hover:border-gray-300 dark:hover:border-gray-600'
+              }`}>
+                <button
+                  onClick={() => toggleFAQ(faq.id)}
+                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                  aria-expanded={openId === faq.id}
+                  aria-controls={`faq-answer-${faq.id}`}
+                >
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white pr-4">
+                    {faq.question}
+                  </h3>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                    openId === faq.id 
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400' 
+                      : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400'
+                  }`}>
+                    {openId === faq.id ? (
+                      <Minus className="w-4 h-4" aria-hidden="true" />
+                    ) : (
+                      <Plus className="w-4 h-4" aria-hidden="true" />
+                    )}
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {openId === faq.id && (
+                    <motion.div
+                      id={`faq-answer-${faq.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: shouldReduceMotion ? 0.01 : 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-5 pt-0">
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -119,4 +136,3 @@ export default function FAQ() {
     </section>
   )
 }
-

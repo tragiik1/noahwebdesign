@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
-import { Instagram, Github, Mail, Linkedin, ArrowRight } from 'lucide-react'
+import { Instagram, Github, Mail, Linkedin, ArrowUpRight, Heart } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -26,93 +26,31 @@ export default function Footer() {
     { name: 'Contact', href: '#contact' },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  }
-
   return (
-    <footer ref={ref} className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer ref={ref} className="relative bg-surface-50 dark:bg-[#070b14] border-t border-gray-200/50 dark:border-gray-800/50">
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/[0.02] to-transparent pointer-events-none" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          {/* Brand */}
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            className="md:col-span-5"
           >
-            <h3 className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent mb-4">
-              Noah
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+            <Link href="/" className="inline-block mb-4">
+              <span className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
+                Noah
+              </span>
+            </Link>
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
               Friendly web developer helping businesses get online. Clean websites that work, without the crazy prices.
             </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            transition={{
-              duration: shouldReduceMotion ? 0.01 : 0.5,
-              delay: shouldReduceMotion ? 0 : 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Quick Links</h4>
-            <motion.ul
-              variants={containerVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              className="space-y-2"
-            >
-              {quickLinks.map((link, index) => (
-                <motion.li key={link.name} variants={itemVariants}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 focus:text-primary-600 dark:focus:text-primary-400 text-sm transition-colors duration-200 will-change-transform focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-1"
-                  >
-                    <motion.span
-                      className="inline-block"
-                      whileHover={shouldReduceMotion ? {} : { x: 4 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {link.name}
-                    </motion.span>
-                    <ArrowRight className="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transform -translate-x-2 group-hover:translate-x-0 group-focus:translate-x-0 transition-all duration-200" aria-hidden="true" />
-                  </Link>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            transition={{
-              duration: shouldReduceMotion ? 0.01 : 0.5,
-              delay: shouldReduceMotion ? 0 : 0.2,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Connect</h4>
-            <div className="flex space-x-4">
+            
+            {/* Social Links */}
+            <div className="flex gap-2">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon
                 return (
@@ -121,52 +59,125 @@ export default function Footer() {
                     href={social.href}
                     target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                     rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                     transition={{
-                      delay: 0.3 + index * 0.1,
-                      duration: 0.3,
-                      ease: [0.16, 1, 0.3, 1],
+                      delay: 0.1 + index * 0.03,
+                      duration: 0.2,
+                      ease: [0.25, 0.1, 0.25, 1],
                     }}
-                    whileHover={shouldReduceMotion ? {} : { scale: 1.1, y: -2 }}
-                    whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-                    className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 focus:bg-primary-600 focus:text-white dark:focus:bg-primary-600 transition-all duration-300 will-change-transform focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                    whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800/50 border border-gray-200/50 dark:border-gray-700/50 hover:border-primary-300 dark:hover:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200"
                     aria-label={social.label}
                   >
-                    <Icon className="w-5 h-5" aria-hidden="true" />
+                    <Icon className="w-4 h-4" aria-hidden="true" />
                   </motion.a>
                 )
               })}
             </div>
           </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.25,
+              delay: shouldReduceMotion ? 0 : 0.05,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="md:col-span-3"
+          >
+            <h4 className="font-display font-semibold text-gray-900 dark:text-white mb-4 text-sm">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors"
+                  >
+                    <span>{link.name}</span>
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Legal Links */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.25,
+              delay: shouldReduceMotion ? 0 : 0.08,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="md:col-span-2"
+          >
+            <h4 className="font-display font-semibold text-gray-900 dark:text-white mb-4 text-sm">
+              Legal
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/privacy"
+                  className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms"
+                  className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Location */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.25,
+              delay: shouldReduceMotion ? 0 : 0.1,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="md:col-span-2"
+          >
+            <h4 className="font-display font-semibold text-gray-900 dark:text-white mb-4 text-sm">
+              Location
+            </h4>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              Sunshine Coast<br />
+              Australia 🇦🇺
+            </p>
+          </motion.div>
         </div>
 
+        {/* Bottom bar */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400"
+          transition={{ duration: 0.25, delay: 0.15 }}
+          className="mt-12 pt-8 border-t border-gray-200/50 dark:border-gray-800/50"
         >
-          <p>&copy; {currentYear} Noah. All rights reserved.</p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/privacy"
-              className="hover:text-primary-600 dark:hover:text-primary-400 focus:text-primary-600 dark:focus:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-1"
-            >
-              Privacy Policy
-            </Link>
-            <span className="text-gray-400" aria-hidden="true">•</span>
-            <Link
-              href="/terms"
-              className="hover:text-primary-600 dark:hover:text-primary-400 focus:text-primary-600 dark:focus:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded px-1"
-            >
-              Terms of Service
-            </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-500 dark:text-gray-500">
+              &copy; {currentYear} Noah. All rights reserved.
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-500 flex items-center gap-1">
+              Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> on the Sunshine Coast
+            </p>
           </div>
-          <p className="mt-2">Sunshine Coast, Australia</p>
         </motion.div>
       </div>
     </footer>
   )
 }
-

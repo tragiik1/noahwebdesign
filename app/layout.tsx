@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import { Inter, Outfit } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -8,7 +8,17 @@ import StickyCTA from '@/components/StickyCTA'
 import { metadata } from './metadata'
 import { StructuredData } from './structured-data'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const outfit = Outfit({ 
+  subsets: ['latin'], 
+  variable: '--font-outfit',
+  display: 'swap',
+})
 
 export { metadata }
 
@@ -19,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-AU" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
