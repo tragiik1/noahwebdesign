@@ -21,7 +21,7 @@ const steps = [
   {
     number: '04',
     title: 'Build',
-    description: 'I build the site and keep you updated. You get to see progress along the way.',
+    description: 'I build the site and keep you updated on progress throughout.',
   },
   {
     number: '05',
@@ -41,37 +41,33 @@ export default function HowIWorkPage() {
       <div className="max-w-3xl mx-auto">
         <Link 
           href="/" 
-          className="text-sm text-stone-500 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 mb-8 inline-block"
+          className="text-coffee-500 dark:text-coffee-400 hover:text-coffee-700 dark:hover:text-coffee-300 mb-8 inline-block"
         >
           ← Back
         </Link>
 
-        <p className="text-sm text-stone-500 dark:text-stone-400 mb-6 tracking-wide uppercase">
-          Process
-        </p>
-        
-        <h1 className="text-3xl sm:text-4xl font-display mb-4 text-stone-900 dark:text-stone-100">
+        <h1 className="text-3xl sm:text-4xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-4">
           How I work
         </h1>
         
-        <p className="text-lg text-stone-600 dark:text-stone-400 mb-16">
+        <p className="text-lg text-coffee-600 dark:text-cream-400 mb-12">
           A straightforward process from first conversation to launch.
         </p>
 
-        <div className="space-y-12">
-          {steps.map((step, index) => (
+        <div className="space-y-6">
+          {steps.map((step) => (
             <div 
               key={step.number} 
-              className={`flex gap-8 ${index !== steps.length - 1 ? 'pb-12 border-b border-stone-200 dark:border-stone-800' : ''}`}
+              className="flex gap-6 p-6 bg-coffee-50 dark:bg-coffee-900/50 rounded"
             >
-              <span className="text-sm text-stone-400 dark:text-stone-600 font-mono">
+              <span className="text-sm text-coffee-400 dark:text-coffee-500 font-mono">
                 {step.number}
               </span>
               <div>
-                <h2 className="text-xl font-display mb-2 text-stone-900 dark:text-stone-100">
+                <h2 className="text-lg font-display font-medium text-coffee-900 dark:text-cream-100 mb-2">
                   {step.title}
                 </h2>
-                <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                <p className="text-coffee-600 dark:text-cream-400">
                   {step.description}
                 </p>
               </div>
@@ -79,15 +75,15 @@ export default function HowIWorkPage() {
           ))}
         </div>
 
-        <div className="mt-16 pt-16 border-t border-stone-200 dark:border-stone-800">
-          <p className="text-lg font-display mb-4 text-stone-900 dark:text-stone-100">
+        <div className="mt-12 p-8 bg-coffee-900 dark:bg-coffee-800 rounded text-center">
+          <p className="text-xl font-display font-medium text-cream-100 mb-4">
             Ready to start?
           </p>
           <Link
             href="/#contact"
-            className="text-sm text-stone-900 dark:text-stone-100 underline underline-offset-4 hover:no-underline"
+            className="inline-flex px-6 py-3 bg-cream-50 text-coffee-900 font-medium rounded hover:bg-cream-100 transition-colors"
           >
-            Get in touch →
+            Get in touch
           </Link>
         </div>
       </div>

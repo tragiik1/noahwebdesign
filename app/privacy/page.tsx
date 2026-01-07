@@ -8,26 +8,26 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto">
         <Link 
           href="/" 
-          className="text-sm text-stone-500 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 mb-8 inline-block"
+          className="text-coffee-500 dark:text-coffee-400 hover:text-coffee-700 dark:hover:text-coffee-300 mb-8 inline-block"
         >
           ← Back
         </Link>
 
-        <h1 className="text-3xl sm:text-4xl font-display mb-2 text-stone-900 dark:text-stone-100">
+        <h1 className="text-3xl sm:text-4xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-2">
           Privacy Policy
         </h1>
-        <p className="text-sm text-stone-500 dark:text-stone-500 mb-12">
+        <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-12">
           Last updated: {new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}
         </p>
 
-        <div className="space-y-10">
+        <div className="space-y-8">
           <Section title="Introduction">
             <p>
-              I&apos;m Noah, and I take your privacy seriously. This policy explains how I collect, use, and protect your information when you use my website or services.
+              I&apos;m Noah, and I take your privacy seriously. This policy explains how I collect, use, and protect your information.
             </p>
             <p>
               Questions? Email me at{' '}
-              <a href="mailto:hello@noahvarlet.com" className="underline underline-offset-4 hover:no-underline">
+              <a href="mailto:hello@noahvarlet.com" className="text-coffee-600 dark:text-coffee-400 hover:underline">
                 hello@noahvarlet.com
               </a>.
             </p>
@@ -39,25 +39,20 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="How I Use Your Information">
-            <p>I use your information to:</p>
-            <ul>
-              <li>Respond to inquiries</li>
-              <li>Communicate about projects</li>
-              <li>Improve the website</li>
-            </ul>
+            <p>I use your information to respond to inquiries, communicate about projects, and improve the website.</p>
             <p>I don&apos;t sell or share your information with third parties.</p>
           </Section>
 
           <Section title="Browser Storage">
             <p>
-              This site saves your theme preference (light/dark mode) in your browser&apos;s local storage. This data stays on your device. The site doesn&apos;t use cookies.
+              This site saves your theme preference in your browser&apos;s local storage. This data stays on your device. The site doesn&apos;t use cookies.
             </p>
           </Section>
 
           <Section title="Your Rights">
             <p>
               You can request access to, correction of, or deletion of your personal information. Contact me at{' '}
-              <a href="mailto:hello@noahvarlet.com" className="underline underline-offset-4 hover:no-underline">
+              <a href="mailto:hello@noahvarlet.com" className="text-coffee-600 dark:text-coffee-400 hover:underline">
                 hello@noahvarlet.com
               </a>.
             </p>
@@ -65,7 +60,7 @@ export default function PrivacyPage() {
 
           <Section title="Contact">
             <p>
-              Email: <a href="mailto:hello@noahvarlet.com" className="underline underline-offset-4 hover:no-underline">hello@noahvarlet.com</a>
+              Email: <a href="mailto:hello@noahvarlet.com" className="text-coffee-600 dark:text-coffee-400 hover:underline">hello@noahvarlet.com</a>
             </p>
             <p>Location: Sunshine Coast, Australia</p>
           </Section>
@@ -77,9 +72,9 @@ export default function PrivacyPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="pb-10 border-b border-stone-200 dark:border-stone-800 last:border-0">
-      <h2 className="text-xl font-display mb-4 text-stone-900 dark:text-stone-100">{title}</h2>
-      <div className="text-stone-600 dark:text-stone-400 space-y-3 leading-relaxed [&>ul]:space-y-2 [&>ul]:pl-5 [&>ul]:list-disc">
+    <section className="pb-8 border-b border-coffee-200 dark:border-coffee-800 last:border-0">
+      <h2 className="text-xl font-display font-medium text-coffee-900 dark:text-cream-100 mb-4">{title}</h2>
+      <div className="text-coffee-600 dark:text-cream-400 space-y-3 leading-relaxed">
         {children}
       </div>
     </section>

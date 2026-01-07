@@ -3,12 +3,12 @@
 const services = [
   {
     title: 'Website Design & Build',
-    description: 'Complete websites from concept to launch, tailored to your needs.',
+    description: 'Complete websites from concept to launch, tailored to your business needs.',
     price: 'From $499',
   },
   {
     title: 'Landing Pages',
-    description: 'Single-page sites for campaigns, products, or services.',
+    description: 'Single-page sites for campaigns, products, or lead generation.',
     price: 'From $299',
   },
   {
@@ -28,48 +28,45 @@ const services = [
   },
   {
     title: 'Maintenance',
-    description: 'Ongoing updates, security patches, and support.',
+    description: 'Ongoing updates, security patches, backups, and support.',
     price: 'From $49/mo',
   },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <p className="text-sm text-stone-500 dark:text-stone-400 mb-6 tracking-wide uppercase">
-          Services
-        </p>
-        
-        <h2 className="text-3xl sm:text-4xl font-display mb-4 text-stone-900 dark:text-stone-100">
-          What I offer
-        </h2>
-        
-        <p className="text-lg text-stone-600 dark:text-stone-400 mb-12 max-w-2xl">
-          Flexible packages tailored to what you actually need.
-        </p>
+    <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-coffee-50 dark:bg-coffee-900/20">
+      <div className="max-w-6xl mx-auto">
+        <div className="max-w-2xl mb-12">
+          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-4">
+            Services & Pricing
+          </h2>
+          <p className="text-lg text-coffee-600 dark:text-cream-400">
+            Flexible packages tailored to what you actually need. No hidden fees.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800 border border-stone-200 dark:border-stone-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-coffee-200 dark:bg-coffee-800 rounded overflow-hidden">
           {services.map((service) => (
             <div 
               key={service.title} 
-              className="p-6 bg-white dark:bg-stone-950"
+              className="p-6 bg-cream-50 dark:bg-coffee-950 hover:bg-cream-100 dark:hover:bg-coffee-900 transition-colors"
             >
-              <h3 className="font-display text-lg mb-2 text-stone-900 dark:text-stone-100">
+              <h3 className="text-lg font-display font-medium text-coffee-900 dark:text-cream-100 mb-2">
                 {service.title}
               </h3>
-              <p className="text-sm text-stone-600 dark:text-stone-400 mb-4">
+              <p className="text-sm text-coffee-600 dark:text-cream-400 mb-4">
                 {service.description}
               </p>
-              <p className="text-sm font-medium text-stone-900 dark:text-stone-100">
+              <p className="text-lg font-medium text-coffee-800 dark:text-cream-200">
                 {service.price}
               </p>
             </div>
           ))}
         </div>
 
-        <p className="mt-8 text-sm text-stone-500 dark:text-stone-500">
-          All prices in AUD. Final quote depends on project scope.
+        <p className="mt-6 text-sm text-coffee-500 dark:text-coffee-400">
+          All prices in AUD. Final quote depends on project scope and requirements.
         </p>
       </div>
     </section>

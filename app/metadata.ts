@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const siteConfig = {
   name: 'Noah - Web Developer',
-  description: 'Friendly 19-year-old web developer from Sunshine Coast, Australia. Building clean, fast, affordable websites for businesses. Specializing in Next.js, React, and modern web development.',
+  description: 'Web developer from Sunshine Coast, Australia. Building clean, fast, affordable websites for businesses. Specializing in Next.js, React, and modern web development.',
   url: 'https://noahwebdesign.com', // Update with your actual domain
   ogImage: '/og-image.jpg', // You can add this later
   links: {

@@ -20,7 +20,7 @@ export default function StickyCTA() {
     <div className="fixed bottom-6 right-6 z-40">
       <Link
         href="#contact"
-        className="px-5 py-3 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-sm font-medium shadow-lg hover:bg-stone-800 dark:hover:bg-stone-200 transition-colors"
+        className="px-5 py-3 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 font-medium shadow-lg rounded transition-colors"
       >
         Get in touch
       </Link>

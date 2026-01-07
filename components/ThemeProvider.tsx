@@ -2,90 +2,69 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'dark' | 'light'
+type ThemeMode = 'light' | 'dark' | 'system'
 
 interface ThemeContextType {
-  theme: Theme
-  toggleTheme: () => void
+  mode: ThemeMode
+  setMode: (mode: ThemeMode) => void
+  resolvedTheme: 'light' | 'dark'
 }
 
-// Default context value for SSR
-const defaultContextValue: ThemeContextType = {
-  theme: 'dark',
-  toggleTheme: () => {},
-}
-
-const ThemeContext = createContext<ThemeContextType>(defaultContextValue)
+const ThemeContext = createContext<ThemeContextType>({
+  mode: 'light',
+  setMode: () => {},
+  resolvedTheme: 'light',
+})
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [mode, setModeState] = useState<ThemeMode>('light')
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
   const [mounted, setMounted] = useState(false)
+
+  const getSystemTheme = (): 'light' | 'dark' => {
+    if (typeof window === 'undefined') return 'light'
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
 
   useEffect(() => {
     setMounted(true)
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme) {
-      setTheme(savedTheme)
-    } else {
-      // Use system preference
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setTheme(systemPrefersDark ? 'dark' : 'light')
-    }
-    
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only update if user hasn't manually set a preference
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light')
-      }
-    }
-    
-    // Modern browsers
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange)
-    } else {
-      // Fallback for older browsers
-      mediaQuery.addListener(handleChange)
-    }
-    
-    return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener('change', handleChange)
-      } else {
-        mediaQuery.removeListener(handleChange)
-      }
+    const savedMode = localStorage.getItem('theme-mode') as ThemeMode | null
+    if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) {
+      setModeState(savedMode)
     }
   }, [])
 
   useEffect(() => {
-    if (mounted) {
-      if (theme === 'dark') {
+    if (!mounted) return
+
+    const updateResolvedTheme = () => {
+      const resolved = mode === 'system' ? getSystemTheme() : mode
+      setResolvedTheme(resolved)
+      
+      if (resolved === 'dark') {
         document.documentElement.classList.add('dark')
       } else {
         document.documentElement.classList.remove('dark')
       }
-      // Only save to localStorage if user manually set it
-      // (system preference changes won't save)
-      if (localStorage.getItem('theme')) {
-        localStorage.setItem('theme', theme)
-      }
     }
-  }, [theme, mounted])
 
-  const toggleTheme = () => {
-    setTheme(prev => {
-      const newTheme = prev === 'dark' ? 'light' : 'dark'
-      // Save manual preference
-      localStorage.setItem('theme', newTheme)
-      return newTheme
-    })
+    updateResolvedTheme()
+
+    if (mode === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      const handler = () => updateResolvedTheme()
+      mediaQuery.addEventListener('change', handler)
+      return () => mediaQuery.removeEventListener('change', handler)
+    }
+  }, [mode, mounted])
+
+  const setMode = (newMode: ThemeMode) => {
+    setModeState(newMode)
+    localStorage.setItem('theme-mode', newMode)
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ mode, setMode, resolvedTheme }}>
       {children}
     </ThemeContext.Provider>
   )
@@ -94,4 +73,3 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   return useContext(ThemeContext)
 }
-

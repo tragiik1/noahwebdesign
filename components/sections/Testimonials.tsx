@@ -9,38 +9,34 @@ const testimonials = [
   {
     name: 'James Patterson',
     business: 'Patterson Plumbing',
-    quote: 'Professional, easy to work with, and the site brought in new enquiries within the first week.',
+    quote: 'Professional, easy to work with. The site brought in new enquiries within the first week.',
   },
   {
     name: 'Emma Chen',
-    business: 'Sunshine Physiotherapy',
-    quote: 'He explained everything clearly and delivered exactly what we discussed. Highly recommend.',
+    business: 'Sunshine Physio',
+    quote: 'He explained everything clearly and delivered exactly what we discussed.',
   },
 ]
 
 export default function Testimonials() {
   return (
-    <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-stone-50 dark:bg-stone-900/50">
-      <div className="max-w-5xl mx-auto">
-        <p className="text-sm text-stone-500 dark:text-stone-400 mb-6 tracking-wide uppercase">
-          Testimonials
-        </p>
-        
-        <h2 className="text-3xl sm:text-4xl font-display mb-12 text-stone-900 dark:text-stone-100">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-coffee-900 dark:bg-coffee-950">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream-100 mb-12">
           What clients say
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <blockquote key={index} className="flex flex-col">
-              <p className="text-stone-600 dark:text-stone-400 leading-relaxed mb-6 flex-grow">
+            <blockquote key={index} className="border-l-2 border-coffee-700 pl-6">
+              <p className="text-cream-200 leading-relaxed mb-6">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
               <footer>
-                <p className="text-stone-900 dark:text-stone-100 font-medium">
+                <p className="text-cream-100 font-medium">
                   {testimonial.name}
                 </p>
-                <p className="text-sm text-stone-500 dark:text-stone-500">
+                <p className="text-cream-400 text-sm">
                   {testimonial.business}
                 </p>
               </footer>
