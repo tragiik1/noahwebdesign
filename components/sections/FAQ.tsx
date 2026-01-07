@@ -5,27 +5,27 @@ import { useState } from 'react'
 const faqs = [
   {
     question: 'How long does a website take?',
-    answer: 'Most projects take 2-4 weeks from start to finish. Simple landing pages can be done in about a week, while larger sites with custom features take longer.',
+    answer: 'Most projects take 2-4 weeks. Simple landing pages can be done in about a week.',
   },
   {
     question: 'What do you need to get started?',
-    answer: 'An idea of what you want and any content you have ready (text, images, logo). I can help with content planning if needed.',
+    answer: 'An idea of what you want and any content you have ready. I can help with planning.',
   },
   {
     question: 'Do you offer payment plans?',
-    answer: 'Yes. Typically 50% deposit to begin, 50% on completion. For larger projects, we can split it into more milestones.',
+    answer: '50% deposit to begin, 50% on completion. Larger projects can be split into milestones.',
   },
   {
     question: 'Can I update the site myself?',
-    answer: 'Yes, I can set up a content management system that lets you edit text and images without touching code.',
+    answer: 'Yes, I can set up a CMS for easy editing without touching code.',
   },
   {
-    question: 'What about hosting and domain?',
-    answer: 'I help set that up. Hosting typically runs $5-20/month depending on your needs. Domain registration is around $15-20/year.',
+    question: 'What about hosting?',
+    answer: 'I help set that up. Hosting runs $5-20/month, domains are $15-20/year.',
   },
   {
-    question: 'Do you do ongoing maintenance?',
-    answer: 'Yes, maintenance packages start at $49/month covering updates, security patches, backups, and minor changes.',
+    question: 'Do you do maintenance?',
+    answer: 'Packages start at $49/month for updates, security, and support.',
   },
 ]
 
@@ -33,31 +33,41 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-32 px-4 sm:px-6 lg:px-8 bg-coffee-50/50 dark:bg-coffee-950/50">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-12">
-          Frequently asked questions
-        </h2>
+        <div className="mb-16">
+          <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-3">FAQ</p>
+          <h2 className="text-3xl font-display font-semibold text-coffee-900 dark:text-cream-100">
+            Questions
+          </h2>
+        </div>
 
-        <div className="divide-y divide-coffee-200 dark:divide-coffee-800">
+        <div className="space-y-0">
           {faqs.map((faq, index) => (
-            <div key={index} className="py-5">
+            <div 
+              key={index} 
+              className="border-b border-coffee-200 dark:border-coffee-800 first:border-t"
+            >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full py-5 flex items-center justify-between text-left group"
               >
-                <span className="text-coffee-900 dark:text-cream-100 font-medium pr-8">
+                <span className="text-coffee-900 dark:text-cream-100 pr-8 group-hover:text-coffee-600 dark:group-hover:text-cream-300 transition-colors">
                   {faq.question}
                 </span>
-                <span className="text-xl text-coffee-400 dark:text-coffee-500 flex-shrink-0">
+                <span className="text-coffee-400 dark:text-coffee-600 text-xl flex-shrink-0">
                   {openIndex === index ? '−' : '+'}
                 </span>
               </button>
-              {openIndex === index && (
-                <p className="mt-3 text-coffee-600 dark:text-cream-400 pr-12">
+              <div 
+                className={`overflow-hidden transition-all duration-200 ${
+                  openIndex === index ? 'max-h-40 pb-5' : 'max-h-0'
+                }`}
+              >
+                <p className="text-coffee-600 dark:text-cream-400 pr-12">
                   {faq.answer}
                 </p>
-              )}
+              </div>
             </div>
           ))}
         </div>

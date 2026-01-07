@@ -31,88 +31,89 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-coffee-50 dark:bg-coffee-900/20">
+    <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-4">
-              Let&apos;s work together
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-5">
+            <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-3">Contact</p>
+            <h2 className="text-3xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-6">
+              Get in touch
             </h2>
-            <p className="text-lg text-coffee-600 dark:text-cream-400 mb-8">
-              Have a project in mind? Send me a message and I&apos;ll get back to you within 24 hours.
+            
+            <p className="text-coffee-600 dark:text-cream-400 mb-8">
+              Send a message and I&apos;ll get back to you within 24 hours.
             </p>
             
-            <div className="space-y-3">
-              <p className="text-coffee-700 dark:text-cream-300">
-                <span className="text-coffee-500 dark:text-coffee-400">Email: </span>
-                <a href="mailto:hello@noahvarlet.com" className="hover:text-coffee-900 dark:hover:text-cream-100 transition-colors">
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Email</p>
+                <a href="mailto:hello@noahvarlet.com" className="text-coffee-900 dark:text-cream-100 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
                   hello@noahvarlet.com
                 </a>
-              </p>
-              <p className="text-coffee-700 dark:text-cream-300">
-                <span className="text-coffee-500 dark:text-coffee-400">Phone: </span>
-                <a href="tel:+61490523663" className="hover:text-coffee-900 dark:hover:text-cream-100 transition-colors">
+              </div>
+              <div>
+                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Phone</p>
+                <a href="tel:+61490523663" className="text-coffee-900 dark:text-cream-100 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
                   0490 523 663
                 </a>
-              </p>
-              <p className="text-coffee-700 dark:text-cream-300">
-                <span className="text-coffee-500 dark:text-coffee-400">Location: </span>
-                Sunshine Coast, QLD
-              </p>
+              </div>
+              <div>
+                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Location</p>
+                <p className="text-coffee-900 dark:text-cream-100">Sunshine Coast, QLD</p>
+              </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                required
-                className="w-full px-4 py-3 bg-cream-100 dark:bg-coffee-900 border-0 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-500 focus:outline-none focus:ring-2 focus:ring-coffee-500"
-              />
-            </div>
-            
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-                className="w-full px-4 py-3 bg-cream-100 dark:bg-coffee-900 border-0 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-500 focus:outline-none focus:ring-2 focus:ring-coffee-500"
-              />
-            </div>
-            
-            <div>
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  required
+                  className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors"
+                />
+              </div>
+              
               <textarea
                 name="message"
                 placeholder="Tell me about your project"
-                rows={5}
+                rows={6}
                 required
-                className="w-full px-4 py-3 bg-cream-100 dark:bg-coffee-900 border-0 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-500 focus:outline-none focus:ring-2 focus:ring-coffee-500 resize-none"
+                className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors resize-none"
               />
-            </div>
-            
-            <button
-              type="submit"
-              disabled={formStatus === 'sending'}
-              className="w-full px-6 py-3 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 font-medium rounded transition-colors disabled:opacity-50"
-            >
-              {formStatus === 'sending' ? 'Sending...' : 'Send message'}
-            </button>
-            
-            {formStatus === 'sent' && (
-              <p className="text-green-600 dark:text-green-400 text-sm">
-                Message sent. I&apos;ll be in touch soon.
-              </p>
-            )}
-            
-            {formStatus === 'error' && (
-              <p className="text-red-600 dark:text-red-400 text-sm">
-                Something went wrong. Try emailing directly.
-              </p>
-            )}
-          </form>
+              
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  disabled={formStatus === 'sending'}
+                  className="px-6 py-3 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium rounded transition-colors disabled:opacity-50"
+                >
+                  {formStatus === 'sending' ? 'Sending...' : 'Send message'}
+                </button>
+                
+                {formStatus === 'sent' && (
+                  <p className="text-sm text-green-600 dark:text-green-400">
+                    Sent. I&apos;ll be in touch.
+                  </p>
+                )}
+                
+                {formStatus === 'error' && (
+                  <p className="text-sm text-red-600 dark:text-red-400">
+                    Error. Try emailing directly.
+                  </p>
+                )}
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

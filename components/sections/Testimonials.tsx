@@ -20,23 +20,26 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-coffee-900 dark:bg-coffee-975">
+    <section className="py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream-100 mb-12">
-          What clients say
-        </h2>
+        <div className="mb-16">
+          <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-3">Testimonials</p>
+          <h2 className="text-3xl font-display font-semibold text-coffee-900 dark:text-cream-100">
+            What clients say
+          </h2>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <blockquote key={index} className="border-l-2 border-coffee-700 pl-6">
-              <p className="text-cream-200 leading-relaxed mb-6">
+            <blockquote key={index} className="flex flex-col">
+              <p className="text-coffee-700 dark:text-cream-300 leading-relaxed flex-grow">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
-              <footer>
-                <p className="text-cream-100 font-medium">
+              <footer className="mt-6 pt-6 border-t border-coffee-200 dark:border-coffee-800">
+                <p className="font-medium text-coffee-900 dark:text-cream-100">
                   {testimonial.name}
                 </p>
-                <p className="text-cream-400 text-sm">
+                <p className="text-sm text-coffee-500 dark:text-coffee-500">
                   {testimonial.business}
                 </p>
               </footer>

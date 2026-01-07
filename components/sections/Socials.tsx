@@ -10,20 +10,20 @@ const socials = [
 
 export default function Socials() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <p className="text-xl font-display font-medium text-coffee-900 dark:text-cream-100">
-          Find me elsewhere
+    <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-coffee-200 dark:border-coffee-800">
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <p className="text-sm text-coffee-500 dark:text-coffee-500">
+          Find me online
         </p>
 
-        <div className="flex gap-3">
+        <div className="flex gap-1">
           {socials.map((social) => (
             <a
               key={social.name}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-coffee-100 dark:bg-coffee-900 text-coffee-600 dark:text-cream-400 hover:text-coffee-900 dark:hover:text-cream-100 rounded transition-colors"
+              className="p-2 text-coffee-400 dark:text-coffee-600 hover:text-coffee-900 dark:hover:text-cream-100 transition-colors"
               aria-label={social.name}
             >
               <social.icon className="w-5 h-5" />

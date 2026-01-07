@@ -8,7 +8,7 @@ export default function StickyCTA() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 500)
+      setIsVisible(window.scrollY > 600)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -20,7 +20,7 @@ export default function StickyCTA() {
     <div className="fixed bottom-6 right-6 z-40">
       <Link
         href="#contact"
-        className="px-5 py-3 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 font-medium shadow-lg rounded transition-colors"
+        className="flex items-center gap-2 px-4 py-2.5 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium shadow-lg rounded transition-all"
       >
         Get in touch
       </Link>
