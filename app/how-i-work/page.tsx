@@ -1,227 +1,96 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Search, Palette, Code, Rocket, CheckCircle } from 'lucide-react'
 
-const processSteps = [
+const steps = [
   {
-    id: 1,
-    title: 'Discovery',
-    icon: Search,
-    description: 'We start with a conversation about your goals, target audience, and what you want to achieve. I\'ll ask questions to understand your business and create a plan that works for you.',
-    details: [
-      'Initial consultation call',
-      'Understanding your business goals',
-      'Defining target audience',
-      'Project scope and timeline',
-    ],
-    color: 'from-blue-500 to-cyan-500',
+    number: '01',
+    title: 'Initial chat',
+    description: 'We have a conversation about your business and what you need. No commitment, just figuring out if we\'re a good fit.',
   },
   {
-    id: 2,
+    number: '02',
+    title: 'Proposal',
+    description: 'I send you a clear proposal with scope, timeline, and pricing. No surprises.',
+  },
+  {
+    number: '03',
     title: 'Design',
-    icon: Palette,
-    description: 'I\'ll create a design that reflects your brand and speaks to your audience. You\'ll see mockups and have the chance to give feedback before we move forward.',
-    details: [
-      'Brand identity review',
-      'Wireframes and mockups',
-      'Design revisions',
-      'Final design approval',
-    ],
-    color: 'from-purple-500 to-pink-500',
+    description: 'I create mockups showing how your site will look. You give feedback, we refine until it\'s right.',
   },
   {
-    id: 3,
-    title: 'Development',
-    icon: Code,
-    description: 'This is where your website comes to life! I\'ll build it using modern technologies, making sure it\'s fast, responsive, and works perfectly on all devices.',
-    details: [
-      'Clean, modern code',
-      'Mobile-responsive design',
-      'Performance optimisation',
-      'Regular progress updates',
-    ],
-    color: 'from-green-500 to-emerald-500',
+    number: '04',
+    title: 'Build',
+    description: 'I build the site and keep you updated. You get to see progress along the way.',
   },
   {
-    id: 4,
+    number: '05',
+    title: 'Review',
+    description: 'You test everything and request changes. We make sure it works perfectly.',
+  },
+  {
+    number: '06',
     title: 'Launch',
-    icon: Rocket,
-    description: 'Time to go live! I\'ll help you get everything set up, test everything thoroughly, and make sure you\'re comfortable managing your new website.',
-    details: [
-      'Final testing and review',
-      'Hosting setup assistance',
-      'Launch and go live',
-      'Training and documentation',
-    ],
-    color: 'from-orange-500 to-red-500',
+    description: 'We go live. I handle the technical stuff and make sure everything runs smoothly.',
   },
 ]
 
 export default function HowIWorkPage() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
-  const shouldReduceMotion = useReducedMotion() ?? false
-
   return (
-    <main className="min-h-screen bg-white dark:bg-[#070b14]">
-      {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-surface-50 via-white to-white dark:from-[#0a1020] dark:via-[#070b14] dark:to-[#070b14]" />
-        
-        {/* Decorative gradient */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-primary-500/10 to-transparent rounded-full blur-3xl" />
+    <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <Link 
+          href="/" 
+          className="text-sm text-stone-500 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 mb-8 inline-block"
+        >
+          ← Back
+        </Link>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-center"
-          >
-            <Link
-              href="/#about"
-              className="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 mb-8 text-sm font-medium transition-colors"
+        <p className="text-sm text-stone-500 dark:text-stone-400 mb-6 tracking-wide uppercase">
+          Process
+        </p>
+        
+        <h1 className="text-3xl sm:text-4xl font-display mb-4 text-stone-900 dark:text-stone-100">
+          How I work
+        </h1>
+        
+        <p className="text-lg text-stone-600 dark:text-stone-400 mb-16">
+          A straightforward process from first conversation to launch.
+        </p>
+
+        <div className="space-y-12">
+          {steps.map((step, index) => (
+            <div 
+              key={step.number} 
+              className={`flex gap-8 ${index !== steps.length - 1 ? 'pb-12 border-b border-stone-200 dark:border-stone-800' : ''}`}
             >
-              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-              <span>Back to About</span>
-            </Link>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 text-gray-900 dark:text-white">
-              How I Work
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              A simple, transparent process that gets you from idea to launch. No surprises, just clear steps.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Process Timeline */}
-      <section ref={ref} className="py-16 lg:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16 lg:space-y-24">
-            {processSteps.map((step, index) => (
-              <ProcessStep
-                key={step.id}
-                step={step}
-                index={index}
-                isInView={isInView}
-                shouldReduceMotion={shouldReduceMotion}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-surface-50 to-white dark:from-[#070b14] dark:via-[#0a1020] dark:to-[#070b14]" />
-        
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="bg-white dark:bg-gray-800/30 rounded-2xl p-8 lg:p-12 border border-gray-200/50 dark:border-gray-700/50 shadow-elevated"
-          >
-            <h2 className="text-2xl sm:text-3xl font-display font-bold mb-4 text-gray-900 dark:text-white">
-              Ready to Get Started?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto">
-              Let&apos;s chat about your project! I&apos;m here to answer any questions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/#contact"
-                className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md"
-              >
-                Get a Free Quote
-              </Link>
-              <Link
-                href="/#portfolio"
-                className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 rounded-xl font-semibold transition-all duration-200"
-              >
-                View My Work
-              </Link>
+              <span className="text-sm text-stone-400 dark:text-stone-600 font-mono">
+                {step.number}
+              </span>
+              <div>
+                <h2 className="text-xl font-display mb-2 text-stone-900 dark:text-stone-100">
+                  {step.title}
+                </h2>
+                <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-    </main>
-  )
-}
-
-function ProcessStep({
-  step,
-  index,
-  isInView,
-  shouldReduceMotion,
-}: {
-  step: typeof processSteps[0]
-  index: number
-  isInView: boolean
-  shouldReduceMotion: boolean
-}) {
-  const stepRef = useRef(null)
-  const stepInView = useInView(stepRef, { once: true, margin: '-50px' })
-  const Icon = step.icon
-
-  return (
-    <motion.div
-      ref={stepRef}
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-      animate={stepInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-      transition={{
-        delay: shouldReduceMotion ? 0 : index * 0.05,
-        duration: shouldReduceMotion ? 0.01 : 0.3,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
-      className="relative"
-    >
-      <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-10">
-        {/* Step number and icon */}
-        <div className="flex-shrink-0">
-          <div className="relative">
-            <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
-              <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-white" aria-hidden="true" />
-            </div>
-            <div className="absolute -top-2 -right-2 w-7 h-7 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center text-sm font-bold text-gray-900 dark:text-white border-2 border-gray-100 dark:border-gray-800 shadow-sm">
-              {step.id}
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* Content */}
-        <div className="flex-1">
-          <h2 className="text-2xl lg:text-3xl font-display font-bold mb-3 text-gray-900 dark:text-white">
-            {step.title}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-            {step.description}
+        <div className="mt-16 pt-16 border-t border-stone-200 dark:border-stone-800">
+          <p className="text-lg font-display mb-4 text-stone-900 dark:text-stone-100">
+            Ready to start?
           </p>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {step.details.map((detail, detailIndex) => (
-              <motion.div
-                key={detailIndex}
-                initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -5 }}
-                animate={stepInView ? { opacity: 1, x: 0 } : { opacity: 0, x: shouldReduceMotion ? 0 : -5 }}
-                transition={{
-                  delay: shouldReduceMotion ? 0 : 0.1 + detailIndex * 0.03,
-                  duration: shouldReduceMotion ? 0.01 : 0.2,
-                }}
-                className="flex items-center gap-2"
-              >
-                <CheckCircle className="w-4 h-4 text-primary-500 flex-shrink-0" aria-hidden="true" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">{detail}</span>
-              </motion.div>
-            ))}
-          </div>
+          <Link
+            href="/#contact"
+            className="text-sm text-stone-900 dark:text-stone-100 underline underline-offset-4 hover:no-underline"
+          >
+            Get in touch →
+          </Link>
         </div>
       </div>
-    </motion.div>
+    </main>
   )
 }

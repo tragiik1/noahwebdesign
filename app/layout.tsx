@@ -1,4 +1,4 @@
-import { Inter, Outfit } from 'next/font/google'
+import { Inter, Instrument_Serif } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -14,9 +14,10 @@ const inter = Inter({
   display: 'swap',
 })
 
-const outfit = Outfit({ 
+const serif = Instrument_Serif({ 
   subsets: ['latin'], 
-  variable: '--font-outfit',
+  weight: '400',
+  variable: '--font-serif',
   display: 'swap',
 })
 
@@ -29,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-AU" suppressHydrationWarning>
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${serif.variable} font-sans antialiased`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
