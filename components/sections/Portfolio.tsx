@@ -4,10 +4,10 @@ import Image from 'next/image'
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-32 px-4 sm:px-6 lg:px-8">
+    <section id="portfolio" className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-coffee-50/50 to-transparent dark:via-coffee-900/20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16">
-          <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-3">Work</p>
+          <p className="text-sm text-coffee-500 dark:text-coffee-500 mb-3">Work</p>
           <h2 className="text-3xl font-display font-semibold text-coffee-900 dark:text-cream-100">
             Recent project
           </h2>
@@ -19,12 +19,12 @@ export default function Portfolio() {
           rel="noopener noreferrer" 
           className="group block"
         >
-          <div className="relative aspect-[16/9] overflow-hidden rounded bg-coffee-100 dark:bg-coffee-900 border border-coffee-200 dark:border-coffee-800">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gradient-to-br from-coffee-100 to-coffee-200 dark:from-coffee-900 dark:to-coffee-800">
             <Image
               src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&h=675&fit=crop"
               alt="JTE Events website"
               fill
-              className="object-cover transition-all duration-500 group-hover:scale-[1.02]"
+              className="object-cover transition-all duration-500 group-hover:scale-[1.02] opacity-90 group-hover:opacity-100"
               sizes="(max-width: 1024px) 100vw, 1152px"
             />
           </div>
@@ -35,7 +35,7 @@ export default function Portfolio() {
                 <h3 className="text-xl font-display font-medium text-coffee-900 dark:text-cream-100">
                   JTE Events
                 </h3>
-                <span className="text-xs px-2 py-0.5 bg-coffee-100 dark:bg-coffee-900 text-coffee-600 dark:text-cream-400 rounded">
+                <span className="text-xs px-2.5 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full">
                   Event Hire
                 </span>
               </div>
@@ -51,19 +51,19 @@ export default function Portfolio() {
           </div>
         </a>
 
-        <div className="mt-24 pt-16 border-t border-coffee-200 dark:border-coffee-800">
+        <div className="mt-24 pt-16 border-t border-coffee-200/60 dark:border-coffee-800/60">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
               <h3 className="text-xl font-display font-medium text-coffee-900 dark:text-cream-100">
                 Have a project in mind?
               </h3>
-              <p className="text-coffee-600 dark:text-cream-400 mt-1">
+              <p className="text-coffee-600 dark:text-coffee-400 mt-1">
                 Let&apos;s talk about how I can help.
               </p>
             </div>
             <a
               href="#contact"
-              className="inline-flex px-5 py-2.5 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium rounded transition-colors"
+              className="inline-flex px-5 py-2.5 bg-coffee-800 dark:bg-cream-100 hover:bg-coffee-700 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium rounded-lg transition-colors"
             >
               Start a project
             </a>

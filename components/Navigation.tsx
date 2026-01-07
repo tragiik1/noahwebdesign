@@ -73,7 +73,7 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-cream-50/95 dark:bg-coffee-975/95 backdrop-blur-sm shadow-sm'
+          ? 'bg-[#f9f7f4]/90 dark:bg-[#0c0806]/90 backdrop-blur-md border-b border-coffee-200/50 dark:border-coffee-800/50'
           : 'bg-transparent'
       }`}
     >
@@ -102,14 +102,14 @@ export default function Navigation() {
             <div className="relative" ref={themeMenuRef}>
               <button
                 onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className="w-9 h-9 flex items-center justify-center text-coffee-600 dark:text-cream-300 hover:text-coffee-900 dark:hover:text-cream-100 transition-colors rounded hover:bg-coffee-100 dark:hover:bg-coffee-800"
+                className="w-9 h-9 flex items-center justify-center text-coffee-500 dark:text-cream-400 hover:text-coffee-900 dark:hover:text-cream-100 transition-colors rounded hover:bg-coffee-100 dark:hover:bg-coffee-900"
                 aria-label="Change theme"
               >
                 {mounted && <ThemeIcon className="w-[18px] h-[18px]" />}
               </button>
               
               {isThemeMenuOpen && mounted && (
-                <div className="absolute right-0 mt-2 w-36 bg-cream-50 dark:bg-coffee-900 rounded shadow-lg border border-coffee-200 dark:border-coffee-700 overflow-hidden py-1">
+                <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-coffee-900 rounded-lg shadow-lg border border-coffee-200 dark:border-coffee-800 overflow-hidden py-1">
                   <button
                     onClick={() => { setMode('light'); setIsThemeMenuOpen(false) }}
                     className={`w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors ${
@@ -151,7 +151,7 @@ export default function Navigation() {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-              className="w-9 h-9 flex items-center justify-center text-coffee-600 dark:text-cream-300"
+              className="w-9 h-9 flex items-center justify-center text-coffee-500 dark:text-cream-400"
               aria-label="Change theme"
             >
               {mounted && <ThemeIcon className="w-5 h-5" />}
@@ -170,7 +170,7 @@ export default function Navigation() {
 
       {/* Mobile Theme Menu */}
       {isThemeMenuOpen && mounted && (
-        <div className="md:hidden absolute right-4 top-14 w-36 bg-cream-50 dark:bg-coffee-900 rounded shadow-lg border border-coffee-200 dark:border-coffee-700 overflow-hidden py-1 z-50">
+        <div className="md:hidden absolute right-4 top-14 w-36 bg-white dark:bg-coffee-900 rounded-lg shadow-lg border border-coffee-200 dark:border-coffee-800 overflow-hidden py-1 z-50">
           <button
             onClick={() => { setMode('light'); setIsThemeMenuOpen(false) }}
             className={`w-full px-4 py-2 text-left text-sm flex items-center gap-3 ${
@@ -203,7 +203,7 @@ export default function Navigation() {
 
       {/* Mobile Nav Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-cream-50 dark:bg-coffee-975 border-t border-coffee-200 dark:border-coffee-800">
+        <div className="md:hidden bg-[#f9f7f4] dark:bg-[#0c0806] border-t border-coffee-200 dark:border-coffee-800">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link

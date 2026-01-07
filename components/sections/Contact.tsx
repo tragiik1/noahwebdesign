@@ -31,35 +31,35 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8 bg-[#f5f2ed] dark:bg-[#100c09]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5">
-            <p className="text-sm text-coffee-500 dark:text-coffee-400 mb-3">Contact</p>
+            <p className="text-sm text-coffee-500 dark:text-coffee-500 mb-3">Contact</p>
             <h2 className="text-3xl font-display font-semibold text-coffee-900 dark:text-cream-100 mb-6">
               Get in touch
             </h2>
             
-            <p className="text-coffee-600 dark:text-cream-400 mb-8">
+            <p className="text-coffee-600 dark:text-coffee-400 mb-8">
               Send a message and I&apos;ll get back to you within 24 hours.
             </p>
             
             <div className="space-y-4 text-sm">
               <div>
-                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Email</p>
-                <a href="mailto:hello@noahvarlet.com" className="text-coffee-900 dark:text-cream-100 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
+                <p className="text-coffee-500 dark:text-coffee-600 mb-1">Email</p>
+                <a href="mailto:hello@noahvarlet.com" className="text-coffee-800 dark:text-cream-200 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
                   hello@noahvarlet.com
                 </a>
               </div>
               <div>
-                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Phone</p>
-                <a href="tel:+61490523663" className="text-coffee-900 dark:text-cream-100 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
+                <p className="text-coffee-500 dark:text-coffee-600 mb-1">Phone</p>
+                <a href="tel:+61490523663" className="text-coffee-800 dark:text-cream-200 hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors">
                   0490 523 663
                 </a>
               </div>
               <div>
-                <p className="text-coffee-500 dark:text-coffee-500 mb-1">Location</p>
-                <p className="text-coffee-900 dark:text-cream-100">Sunshine Coast, QLD</p>
+                <p className="text-coffee-500 dark:text-coffee-600 mb-1">Location</p>
+                <p className="text-coffee-800 dark:text-cream-200">Sunshine Coast, QLD</p>
               </div>
             </div>
           </div>
@@ -72,14 +72,14 @@ export default function Contact() {
                   name="name"
                   placeholder="Name"
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors"
+                  className="w-full px-4 py-3 bg-white/60 dark:bg-coffee-900/30 border border-coffee-200/60 dark:border-coffee-800/60 text-coffee-900 dark:text-cream-100 rounded-lg placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 focus:bg-white dark:focus:bg-coffee-900/50 transition-all"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors"
+                  className="w-full px-4 py-3 bg-white/60 dark:bg-coffee-900/30 border border-coffee-200/60 dark:border-coffee-800/60 text-coffee-900 dark:text-cream-100 rounded-lg placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 focus:bg-white dark:focus:bg-coffee-900/50 transition-all"
                 />
               </div>
               
@@ -88,20 +88,20 @@ export default function Contact() {
                 placeholder="Tell me about your project"
                 rows={6}
                 required
-                className="w-full px-4 py-3 bg-transparent border border-coffee-200 dark:border-coffee-800 text-coffee-900 dark:text-cream-100 rounded placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 transition-colors resize-none"
+                className="w-full px-4 py-3 bg-white/60 dark:bg-coffee-900/30 border border-coffee-200/60 dark:border-coffee-800/60 text-coffee-900 dark:text-cream-100 rounded-lg placeholder:text-coffee-400 dark:placeholder:text-coffee-600 focus:outline-none focus:border-coffee-400 dark:focus:border-coffee-600 focus:bg-white dark:focus:bg-coffee-900/50 transition-all resize-none"
               />
               
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
                   disabled={formStatus === 'sending'}
-                  className="px-6 py-3 bg-coffee-900 dark:bg-cream-100 hover:bg-coffee-800 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium rounded transition-colors disabled:opacity-50"
+                  className="px-6 py-3 bg-coffee-800 dark:bg-cream-100 hover:bg-coffee-700 dark:hover:bg-cream-200 text-cream-50 dark:text-coffee-900 text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
                 >
                   {formStatus === 'sending' ? 'Sending...' : 'Send message'}
                 </button>
                 
                 {formStatus === 'sent' && (
-                  <p className="text-sm text-green-600 dark:text-green-400">
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400">
                     Sent. I&apos;ll be in touch.
                   </p>
                 )}

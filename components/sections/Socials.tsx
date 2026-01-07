@@ -10,9 +10,9 @@ const socials = [
 
 export default function Socials() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-coffee-200 dark:border-coffee-800">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-coffee-200/50 dark:border-coffee-800/50">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <p className="text-sm text-coffee-500 dark:text-coffee-500">
+        <p className="text-sm text-coffee-500 dark:text-coffee-600">
           Find me online
         </p>
 
@@ -23,7 +23,7 @@ export default function Socials() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-coffee-400 dark:text-coffee-600 hover:text-coffee-900 dark:hover:text-cream-100 transition-colors"
+              className="p-2.5 text-coffee-400 dark:text-coffee-600 hover:text-coffee-700 dark:hover:text-coffee-300 hover:bg-coffee-100/50 dark:hover:bg-coffee-900/50 rounded-lg transition-all"
               aria-label={social.name}
             >
               <social.icon className="w-5 h-5" />
