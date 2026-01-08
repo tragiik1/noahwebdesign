@@ -15,7 +15,7 @@ const inter = Inter({
 
 const dmSans = DM_Sans({ 
   subsets: ['latin'], 
-  variable: '--font-display',
+  variable: '--font-sans',
   weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
